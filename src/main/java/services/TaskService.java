@@ -13,6 +13,7 @@ import repositoryJPA.TaskRepository;
 import repositoryJPA.WorkerRepository;
 
 import java.awt.print.Pageable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -99,7 +100,16 @@ public class TaskService implements TaskServiceInterface {
     @Transactional(readOnly = true)
     @Override
     public List<TaskToNotifyDTO> getTasksToNotify(Date now) {
+        Calendar calendar = Calendar.getInstance();
 
-        return;
+        calendar.setTime(now);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        Date from = calendar.getTime();
+
+        calendar.add(Calendar.MINUTE, 2);
+        Date to = calendar.getTime();
+
+        return taskRepository.findTaskToNotify(from, to);
     }
 }
