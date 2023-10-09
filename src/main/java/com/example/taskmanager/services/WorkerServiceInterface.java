@@ -1,8 +1,7 @@
-package services;
+package com.example.taskmanager.services;
 
-import dto.TaskDTO;
-import dto.TaskForWorkerDTO;
-import dto.WorkerDTO;
+import com.example.taskmanager.dto.TaskForWorkerDTO;
+import com.example.taskmanager.dto.WorkerDTO;
 
 import java.awt.print.Pageable;
 import java.util.List;

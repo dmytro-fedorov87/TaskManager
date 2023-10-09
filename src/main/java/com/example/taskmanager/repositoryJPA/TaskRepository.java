@@ -1,8 +1,8 @@
-package repositoryJPA;
+package com.example.taskmanager.repositoryJPA;
 
-import dto.TaskToNotifyDTO;
-import model.Condition;
-import model.Task;
+import com.example.taskmanager.dto.TaskToNotifyDTO;
+import com.example.taskmanager.model.Condition;
+import com.example.taskmanager.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

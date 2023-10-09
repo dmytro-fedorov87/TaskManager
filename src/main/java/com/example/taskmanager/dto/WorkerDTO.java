@@ -1,4 +1,4 @@
-package dto;
+package com.example.taskmanager.dto;
 
 public class WorkerDTO {
     private Long id;

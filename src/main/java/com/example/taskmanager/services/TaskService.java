@@ -1,18 +1,16 @@
-package services;
+package com.example.taskmanager.services;
 
-import dto.ProjectDTO;
-import dto.TaskDTO;
-import dto.TaskToNotifyDTO;
-import model.Project;
-import model.Task;
-import model.Worker;
+import com.example.taskmanager.dto.TaskDTO;
+import com.example.taskmanager.dto.TaskToNotifyDTO;
+import com.example.taskmanager.model.Project;
+import com.example.taskmanager.model.Task;
+import com.example.taskmanager.model.Worker;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositoryJPA.ProjectRepository;
-import repositoryJPA.TaskRepository;
-import repositoryJPA.WorkerRepository;
+import com.example.taskmanager.repositoryJPA.ProjectRepository;
+import com.example.taskmanager.repositoryJPA.TaskRepository;
+import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
-import java.awt.print.Pageable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

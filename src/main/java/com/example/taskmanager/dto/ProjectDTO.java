@@ -1,8 +1,7 @@
-package dto;
+package com.example.taskmanager.dto;
 
-import model.Condition;
+import com.example.taskmanager.model.Condition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectDTO {

@@ -1,6 +1,6 @@
-package model;
+package com.example.taskmanager.model;
 
-import dto.WorkerDTO;
+import com.example.taskmanager.dto.WorkerDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

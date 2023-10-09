@@ -1,7 +1,7 @@
-package model;
+package com.example.taskmanager.model;
 
-import dto.ProjectDTO;
-import dto.TaskDTO;
+import com.example.taskmanager.dto.ProjectDTO;
+import com.example.taskmanager.dto.TaskDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

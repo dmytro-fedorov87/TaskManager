@@ -1,9 +1,9 @@
-package dto;
+package com.example.taskmanager.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import model.Condition;
+import com.example.taskmanager.model.Condition;
 
 import java.util.Date;
 

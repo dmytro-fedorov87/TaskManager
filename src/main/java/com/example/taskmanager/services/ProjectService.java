@@ -1,11 +1,11 @@
-package services;
+package com.example.taskmanager.services;
 
-import dto.ProjectDTO;
-import model.Condition;
-import model.Project;
+import com.example.taskmanager.dto.ProjectDTO;
+import com.example.taskmanager.model.Condition;
+import com.example.taskmanager.model.Project;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositoryJPA.ProjectRepository;
+import com.example.taskmanager.repositoryJPA.ProjectRepository;
 
 import java.awt.print.Pageable;
 import java.util.Comparator;

@@ -1,15 +1,13 @@
-package repositoryJPA;
+package com.example.taskmanager.repositoryJPA;
 
-import dto.TaskForWorkerDTO;
-import dto.TaskToNotifyDTO;
-import model.Task;
-import model.Worker;
+import com.example.taskmanager.dto.TaskForWorkerDTO;
+import com.example.taskmanager.model.Task;
+import com.example.taskmanager.model.Worker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.awt.print.Pageable;
-import java.util.Date;
 import java.util.List;
 
 public interface WorkerRepository extends JpaRepository<Worker, Long> {

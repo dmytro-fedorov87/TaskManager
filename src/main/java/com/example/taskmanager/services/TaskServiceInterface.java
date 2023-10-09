@@ -1,11 +1,8 @@
-package services;
+package com.example.taskmanager.services;
 
-import dto.ProjectDTO;
-import dto.TaskDTO;
-import dto.TaskToNotifyDTO;
-import model.Task;
+import com.example.taskmanager.dto.TaskDTO;
+import com.example.taskmanager.dto.TaskToNotifyDTO;
 
-import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
 

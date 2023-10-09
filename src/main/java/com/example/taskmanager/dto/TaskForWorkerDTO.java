@@ -1,6 +1,6 @@
-package dto;
+package com.example.taskmanager.dto;
 
-import model.Condition;
+import com.example.taskmanager.model.Condition;
 
 public class TaskForWorkerDTO {
     private String text;

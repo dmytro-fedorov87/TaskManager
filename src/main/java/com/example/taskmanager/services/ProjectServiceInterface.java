@@ -1,8 +1,7 @@
-package services;
+package com.example.taskmanager.services;
 
-import dto.ProjectDTO;
-import model.Condition;
-import model.Project;
+import com.example.taskmanager.dto.ProjectDTO;
+import com.example.taskmanager.model.Condition;
 
 import java.awt.print.Pageable;
 import java.util.List;

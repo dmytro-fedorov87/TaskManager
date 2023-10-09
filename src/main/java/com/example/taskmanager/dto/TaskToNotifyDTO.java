@@ -1,4 +1,4 @@
-package dto;
+package com.example.taskmanager.dto;
 
 
 import java.util.Date;

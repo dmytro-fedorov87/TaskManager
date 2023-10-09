@@ -1,18 +1,17 @@
-package services;
+package com.example.taskmanager.services;
 
-import dto.TaskDTO;
-import dto.TaskForWorkerDTO;
-import dto.WorkerDTO;
-import model.Task;
-import model.Worker;
+import com.example.taskmanager.dto.TaskForWorkerDTO;
+import com.example.taskmanager.dto.WorkerDTO;
+import com.example.taskmanager.model.Task;
+import com.example.taskmanager.model.Worker;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import repositoryJPA.WorkerRepository;
+import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
 import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 @Service
 public class WorkerService implements WorkerServiceInterface {
     private final WorkerRepository workerRepository;
