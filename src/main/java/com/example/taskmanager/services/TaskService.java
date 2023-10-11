@@ -105,7 +105,7 @@ public class TaskService implements TaskServiceInterface {
         calendar.set(Calendar.MILLISECOND, 0);
         Date from = calendar.getTime();
 
-        calendar.add(Calendar.MINUTE, 2);
+        calendar.add(Calendar.MINUTE, 1);
         Date to = calendar.getTime();
 
         return taskRepository.findTaskToNotify(from, to);
