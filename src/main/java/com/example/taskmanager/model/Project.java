@@ -25,6 +25,10 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
     public Project(String name, Condition condition) {
         this.name = name;
         this.condition = condition;

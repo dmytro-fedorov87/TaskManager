@@ -23,6 +23,10 @@ public class Worker {
     @OneToMany(mappedBy = "worker")
     private List<Task> tasks = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
     private Worker(String name, String qualification, String email) {
         this.name = name;
         this.qualification = qualification;
