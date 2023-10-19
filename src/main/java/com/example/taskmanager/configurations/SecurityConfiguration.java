@@ -18,7 +18,7 @@ private final AuthenticationSuccessHandler authenticationSuccessHandler;
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout")
+                .requestMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
