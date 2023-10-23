@@ -1,8 +1,8 @@
 package com.example.taskmanager.model;
 
 import com.example.taskmanager.dto.AccountDTO;
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 

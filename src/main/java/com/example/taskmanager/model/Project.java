@@ -2,7 +2,7 @@ package com.example.taskmanager.model;
 
 import com.example.taskmanager.dto.ProjectDTO;
 import com.example.taskmanager.dto.TaskDTO;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
