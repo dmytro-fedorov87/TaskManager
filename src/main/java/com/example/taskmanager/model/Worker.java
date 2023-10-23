@@ -47,9 +47,10 @@ public class Worker {
     public WorkerDTO toWorkerDTO() {
         return new WorkerDTO(id, email, name, qualification);
     }
-public void addTaskToWorker(Task task){
+
+    public void addTaskToWorker(Task task) {
         tasks.add(task);
         task.setWorker(this);
-}
+    }
 
 }
