@@ -62,6 +62,8 @@ public class ProjectService implements ProjectServiceInterface {
         return projectDTOList;
     }
 
+    @Transactional(readOnly = true)
+    @Override
     public ProjectDTO getProject(Long id) {
         var projectOptional = projectRepository.findById(id);
         Project project = new Project();

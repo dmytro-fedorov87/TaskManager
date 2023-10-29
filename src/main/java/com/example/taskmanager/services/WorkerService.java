@@ -77,7 +77,10 @@ public class WorkerService implements WorkerServiceInterface {
         tasks.forEach((a) -> taskForWorkerDTOList.add(a.toTaskForWorkerDTO()));
         return taskForWorkerDTOList;
     }
-    public TaskForWorkerDTO getTaskForWorker(Long idTask){
+
+    @Transactional(readOnly = true)
+    @Override
+    public TaskForWorkerDTO getTaskForWorker(Long idTask) {
         return workerRepository.findTaskByIdTask(idTask); //TODO
     }
 }
