@@ -3,16 +3,26 @@ package com.example.taskmanager.dto;
 import com.example.taskmanager.model.Condition;
 
 public class TaskForWorkerDTO {
+    private Long id;
     private String name;
     private String text;
     private Condition condition;
     private String projectName;
 
-    public TaskForWorkerDTO(String name, String text, Condition condition, String projectName) {
+    public TaskForWorkerDTO(Long id, String name, String text, Condition condition, String projectName) {
+        this.id = id;
         this.name = name;
         this.text = text;
         this.condition = condition;
         this.projectName = projectName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

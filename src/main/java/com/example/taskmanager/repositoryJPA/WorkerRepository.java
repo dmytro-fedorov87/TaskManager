@@ -15,7 +15,7 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
     List<Task> findByEmail(String email, Pageable pageable);
 
-    @Query("SELECT new com.example.taskmanager.dto.TaskForWorkerDTO(t.name, t.text, t.condition, t.project.name)" +
+    @Query("SELECT new com.example.taskmanager.dto.TaskForWorkerDTO(t.id, t.name, t.text, t.condition, t.project.name)" +
             "FROM Worker w, Task t WHERE t.id = :id")
         //Check how it work.
     TaskForWorkerDTO findTaskByIdTask(@Param("id") Long id); //TODO

@@ -42,7 +42,7 @@ public class Task {
     }
 
     public TaskForWorkerDTO toTaskForWorkerDTO() {
-        return new TaskForWorkerDTO(name, text, condition, project.getName());
+        return new TaskForWorkerDTO(id, name, text, condition, project.getName());
     }
 
     public static Task of(String name, String text, Date dateStart, Condition condition) {
