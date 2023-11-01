@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class TaskDTO {
     private Long id;
+    private String name;
     private String text;
 
     private Condition condition;
@@ -23,15 +24,18 @@ public class TaskDTO {
     public TaskDTO(@JsonProperty(required = true) Date dateStart,
                    @JsonProperty(required = true) Condition condition,
                    @JsonProperty(required = true) String text,
-                   @JsonProperty(required = true) Long idWorker){
+                   @JsonProperty(required = true) Long idWorker,
+                   @JsonProperty(required = true) String name) {
+        this.name = name;
         this.text = text;
         this.condition = condition;
         this.dateStart = dateStart;
         this.idWorker = idWorker;
     }
 
-    public TaskDTO(Long id, String text, Condition condition, Date dateStart, Long idProject, Long idWorker) {
+    public TaskDTO(Long id, String name, String text, Condition condition, Date dateStart, Long idProject, Long idWorker) {
         this.id = id;
+        this.name = name;
         this.text = text;
         this.condition = condition;
         this.dateStart = dateStart;
@@ -48,6 +52,14 @@ public class TaskDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getText() {
@@ -90,5 +102,3 @@ public class TaskDTO {
         this.idWorker = idWorker;
     }
 }
-
-

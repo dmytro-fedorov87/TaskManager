@@ -81,6 +81,7 @@ public class WorkerService implements WorkerServiceInterface {
     @Transactional(readOnly = true)
     @Override
     public TaskForWorkerDTO getTaskForWorker(Long idTask) {
+
         return workerRepository.findTaskByIdTask(idTask); //TODO
     }
 }

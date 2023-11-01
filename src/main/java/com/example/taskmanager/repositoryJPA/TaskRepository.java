@@ -17,7 +17,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findTaskByCondition(Condition condition, Pageable pageable);
 
-    @Query("SELECT NEW com.example.taskmanager.dto.TaskToNotifyDTO(w.email, t.text, t.dateStart)" + //TODO
+    @Query("SELECT NEW com.example.taskmanager.dto.TaskToNotifyDTO(t.name, w.email, t.text, t.dateStart)" + //TODO
             "FROM Worker w, Task t WHERE t.dateStart >= :from AND t.dateStart < :to")
     List<TaskToNotifyDTO> findTaskToNotify(@Param("to") Date to, @Param("from") Date from);
 

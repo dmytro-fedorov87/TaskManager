@@ -18,9 +18,9 @@ public class EmailService implements EmailServiceInterface {
     }
 
     @Override
-    public void sendMessage(TaskToNotifyDTO task) {
+    public void sendMessage(TaskToNotifyDTO task) { // TODO
         SimpleMailMessage mailMessage = context.getBean(SimpleMailMessage.class);
-        String text = String.format(mailMessage.getText(), task.getData(), task.getText());
+        String text = String.format(mailMessage.getText(), task.getData(), task.getName() + ": " + task.getText());// check how it work
         mailMessage.setText(text);
         mailMessage.setTo(task.getEmail());
         mailSender.send(mailMessage);

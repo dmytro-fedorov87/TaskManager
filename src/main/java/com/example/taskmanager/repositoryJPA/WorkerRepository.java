@@ -14,8 +14,10 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
     boolean existsByEmail(String email);
 
     List<Task> findByEmail(String email, Pageable pageable);
-    @Query("SELECT new com.example.taskmanager.dto.TaskForWorkerDTO(t.text, t.condition, t.project.name)" +
-            "FROM Worker w, Task t WHERE t.id = :id") //Check how it work.
-    TaskForWorkerDTO findTaskByIdTask (@Param("id") Long id); //TODO
+
+    @Query("SELECT new com.example.taskmanager.dto.TaskForWorkerDTO(t.name, t.text, t.condition, t.project.name)" +
+            "FROM Worker w, Task t WHERE t.id = :id")
+        //Check how it work.
+    TaskForWorkerDTO findTaskByIdTask(@Param("id") Long id); //TODO
 
 }
