@@ -36,6 +36,15 @@ public class Account {
         return Account.of(accountDTO.getName(), accountDTO.getEmail(), accountDTO.getPictureUrl());
     }
 
+    public void addProjectToAccount(Project project){
+        projects.add(project);
+        project.setAccount(this);
+    }
+    public void addWorkerToAccount(Worker worker){
+        workers.add(worker);
+        worker.setAccount(this);
+    }
+
     public Long getId() {
         return id;
     }

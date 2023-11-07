@@ -23,11 +23,12 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Transactional
     @Override
-    public void addProject(ProjectDTO projectDTO) {
+    public void addProject(ProjectDTO projectDTO) { //TODO
         if (projectRepository.existsByName(projectDTO.getName()))
             return;
 
         Project project = Project.fromProjectDTO(projectDTO);
+        1111
         projectRepository.save(project);
 
     }
@@ -40,8 +41,8 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Transactional
     @Override
-    public void updateProjectName(ProjectDTO projectDTO) {
-        var projectOptional = projectRepository.findById(projectDTO.getId());
+    public void updateProjectName(ProjectDTO projectDTO) { //TODO
+        var projectOptional = projectRepository.findById(projectDTO.getId()); // requestParam String name, not DTO
         Project project = new Project();
         if (projectOptional.isPresent()) {
             project = projectOptional.get();
@@ -52,8 +53,8 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ProjectDTO> getProjects(Condition condition, Pageable pageable) {
-        List<Project> projectList = projectRepository.findAll();
+    public List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable) {
+        List<Project> projectList = projectRepository.findByAccountEmail(email);
         List<ProjectDTO> projectDTOList = projectList.stream().
                 filter(a -> a.getCondition().equals(condition)).
                 map((a) -> a.toProjectDTO()).
@@ -72,5 +73,11 @@ public class ProjectService implements ProjectServiceInterface {
 
         }
         return project.toProjectDTO();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Long countProjects(String email, Condition con) {
+        return projectRepository.countByAccountEmailAndCondition(email, con);
     }
 }

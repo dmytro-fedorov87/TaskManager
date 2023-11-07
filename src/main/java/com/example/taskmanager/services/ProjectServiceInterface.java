@@ -13,7 +13,10 @@ public interface ProjectServiceInterface {
 
     void updateProjectName(ProjectDTO projectDTO);
 
-    List<ProjectDTO> getProjects(Condition condition, Pageable pageable);
+    List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable);
 
     ProjectDTO getProject(Long id);
+
+    Long countProjects(String email, Condition con);
+
 }
