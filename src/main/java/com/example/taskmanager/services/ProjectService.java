@@ -1,13 +1,19 @@
 package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.ProjectDTO;
+import com.example.taskmanager.dto.TaskDTO;
+import com.example.taskmanager.model.Account;
 import com.example.taskmanager.model.Condition;
 import com.example.taskmanager.model.Project;
+import com.example.taskmanager.model.Task;
+import com.example.taskmanager.repositoryJPA.AccountRepository;
+import com.example.taskmanager.repositoryJPA.TaskRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.taskmanager.repositoryJPA.ProjectRepository;
 
 import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,21 +21,26 @@ import java.util.stream.Collectors;
 @Service
 public class ProjectService implements ProjectServiceInterface {
     private final ProjectRepository projectRepository;
+    private final AccountRepository accountRepository;
+    private final TaskRepository taskRepository;
 
 
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository, AccountRepository accountRepository, TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
+        this.accountRepository = accountRepository;
+        this.taskRepository = taskRepository;
     }
 
     @Transactional
     @Override
-    public void addProject(ProjectDTO projectDTO) { //TODO
+    public void addProject(ProjectDTO projectDTO, String email) {
         if (projectRepository.existsByName(projectDTO.getName()))
             return;
 
         Project project = Project.fromProjectDTO(projectDTO);
-        1111
-        projectRepository.save(project);
+        Account account = accountRepository.findByEmail(email);
+        account.addProjectToAccount(project);
+        accountRepository.save(account);
 
     }
 
@@ -42,7 +53,7 @@ public class ProjectService implements ProjectServiceInterface {
     @Transactional
     @Override
     public void updateProjectName(ProjectDTO projectDTO) { //TODO
-        var projectOptional = projectRepository.findById(projectDTO.getId()); // requestParam String name, not DTO
+        var projectOptional = projectRepository.findById(projectDTO.getId()); // need to remade, requestParam String name, not DTO
         Project project = new Project();
         if (projectOptional.isPresent()) {
             project = projectOptional.get();
@@ -54,7 +65,7 @@ public class ProjectService implements ProjectServiceInterface {
     @Transactional(readOnly = true)
     @Override
     public List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable) {
-        List<Project> projectList = projectRepository.findByAccountEmail(email);
+        List<Project> projectList = projectRepository.findByAccountEmail(email, pageable);
         List<ProjectDTO> projectDTOList = projectList.stream().
                 filter(a -> a.getCondition().equals(condition)).
                 map((a) -> a.toProjectDTO()).
@@ -73,6 +84,14 @@ public class ProjectService implements ProjectServiceInterface {
 
         }
         return project.toProjectDTO();
+    }
+    @Transactional(readOnly = true)
+    @Override
+    public List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, Pageable pageable){
+        List<Task> taskList = taskRepository.findTaskByConditionAndProject_Id(idProject,taskCondition, pageable);
+        List<TaskDTO> taskDTOList = new ArrayList<>();
+        taskList.forEach((a)->taskDTOList.add(a.toTaskDTO()));
+        return taskDTOList;
     }
 
     @Transactional(readOnly = true)

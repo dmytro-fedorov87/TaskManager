@@ -11,7 +11,7 @@ public interface WorkerServiceInterface {
 
     void deleteWorker(List<Long> idList);
 
-    List<WorkerDTO> getWorkers();
+    List<WorkerDTO> getWorkers();//TODO
 
     void updateWorker(WorkerDTO workerDTO);
 

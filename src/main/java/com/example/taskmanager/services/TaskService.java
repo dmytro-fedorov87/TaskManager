@@ -56,8 +56,8 @@ public class TaskService implements TaskServiceInterface {
 
     @Transactional
     @Override
-    public void updateTask(TaskDTO taskDTO, Long idProject) {
-        var taskOptional = taskRepository.findById(taskDTO.getId());
+    public void updateTask(TaskDTO taskDTO, Long idProject) { // TODO
+        var taskOptional = taskRepository.findById(taskDTO.getId()); // check correct working this method
         if (taskOptional.isEmpty()) {
             return;
         }

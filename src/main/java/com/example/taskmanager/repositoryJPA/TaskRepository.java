@@ -12,12 +12,12 @@ import java.util.Date;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    List<Task> findTaskByProject(String nameProject, Pageable pageable);
+    //List<Task> findTaskByProject(String nameProject, Pageable pageable);
 
 
-    //List<Task> findTaskByCondition(Condition condition, Pageable pageable);
+    List<Task> findTaskByConditionAndProject_Id(Long idProject, Condition condition, Pageable pageable);
 
-    @Query("SELECT NEW com.example.taskmanager.dto.TaskToNotifyDTO(t.name, w.email, t.text, t.dateStart)" + //TODO
+    @Query("SELECT NEW com.example.taskmanager.dto.TaskToNotifyDTO(t.name, w.email, t.text, t.dateStart)" +
             "FROM Worker w, Task t WHERE t.dateStart >= :from AND t.dateStart < :to")
     List<TaskToNotifyDTO> findTaskToNotify(@Param("to") Date to, @Param("from") Date from);
 

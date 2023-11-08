@@ -29,18 +29,21 @@ public class Account {
         this.email = email;
         this.pictureUrl = pictureUrl;
     }
-    public static Account of(String name, String email, String pictureUrl){
-        return new Account(name, email,pictureUrl);
+
+    public static Account of(String name, String email, String pictureUrl) {
+        return new Account(name, email, pictureUrl);
     }
-    public static Account fromAccountDTO(AccountDTO accountDTO){
+
+    public static Account fromAccountDTO(AccountDTO accountDTO) {
         return Account.of(accountDTO.getName(), accountDTO.getEmail(), accountDTO.getPictureUrl());
     }
 
-    public void addProjectToAccount(Project project){
+    public void addProjectToAccount(Project project) {
         projects.add(project);
         project.setAccount(this);
     }
-    public void addWorkerToAccount(Worker worker){
+
+    public void addWorkerToAccount(Worker worker) {
         workers.add(worker);
         worker.setAccount(this);
     }
