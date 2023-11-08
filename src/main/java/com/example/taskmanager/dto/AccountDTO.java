@@ -11,7 +11,7 @@ public class AccountDTO {
         this.pictureUrl = pictureUrl;
     }
 
-    public static AccountDTO of(String name, String email, String pictureUrl){
+    public static AccountDTO of(String name, String email, String pictureUrl) {
         return new AccountDTO(name, email, pictureUrl);
     }
 

@@ -1,19 +1,15 @@
 package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.ProjectDTO;
-import com.example.taskmanager.dto.TaskDTO;
 import com.example.taskmanager.model.Account;
 import com.example.taskmanager.model.Condition;
 import com.example.taskmanager.model.Project;
-import com.example.taskmanager.model.Task;
 import com.example.taskmanager.repositoryJPA.AccountRepository;
-import com.example.taskmanager.repositoryJPA.TaskRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.taskmanager.repositoryJPA.ProjectRepository;
 
 import java.awt.print.Pageable;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +18,11 @@ import java.util.stream.Collectors;
 public class ProjectService implements ProjectServiceInterface {
     private final ProjectRepository projectRepository;
     private final AccountRepository accountRepository;
-    private final TaskRepository taskRepository;
 
 
-    public ProjectService(ProjectRepository projectRepository, AccountRepository accountRepository, TaskRepository taskRepository) {
+    public ProjectService(ProjectRepository projectRepository, AccountRepository accountRepository) {
         this.projectRepository = projectRepository;
         this.accountRepository = accountRepository;
-        this.taskRepository = taskRepository;
     }
 
     @Transactional
@@ -84,14 +78,6 @@ public class ProjectService implements ProjectServiceInterface {
 
         }
         return project.toProjectDTO();
-    }
-    @Transactional(readOnly = true)
-    @Override
-    public List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, Pageable pageable){
-        List<Task> taskList = taskRepository.findTaskByConditionAndProject_Id(idProject,taskCondition, pageable);
-        List<TaskDTO> taskDTOList = new ArrayList<>();
-        taskList.forEach((a)->taskDTOList.add(a.toTaskDTO()));
-        return taskDTOList;
     }
 
     @Transactional(readOnly = true)

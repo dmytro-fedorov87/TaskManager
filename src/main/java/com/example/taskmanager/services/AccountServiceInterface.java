@@ -4,5 +4,5 @@ import com.example.taskmanager.dto.AccountDTO;
 
 public interface AccountServiceInterface {
 
-     void addAccount(AccountDTO accountDTO);
+    void addAccount(AccountDTO accountDTO);
 }

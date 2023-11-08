@@ -8,7 +8,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 public class SecurityConfiguration {
-private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
     public SecurityConfiguration(AuthenticationSuccessHandler authenticationSuccessHandler) {
         this.authenticationSuccessHandler = authenticationSuccessHandler;
@@ -19,7 +19,7 @@ private final AuthenticationSuccessHandler authenticationSuccessHandler;
         http
                 .authorizeRequests()
                 .antMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout")
-                    .permitAll()
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

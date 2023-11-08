@@ -9,13 +9,11 @@ public class ProjectDTO {
     private String name;
     private Condition condition;
 
-    private List<TaskDTO> taskDTOList;
 
-    public ProjectDTO(Long id, String name, Condition condition, List<TaskDTO> taskDTOList) {
+    public ProjectDTO(Long id, String name, Condition condition) {
         this.id = id;
         this.name = name;
         this.condition = condition;
-        this.taskDTOList = taskDTOList;
     }
 
     public Long getId() {
@@ -42,11 +40,4 @@ public class ProjectDTO {
         this.condition = condition;
     }
 
-    public List<TaskDTO> getTaskDTOList() {
-        return taskDTOList;
-    }
-
-    public void setTaskDTOList(List<TaskDTO> taskDTOList) {
-        this.taskDTOList = taskDTOList;
-    }
 }

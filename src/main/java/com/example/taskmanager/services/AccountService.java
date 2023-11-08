@@ -18,7 +18,7 @@ public class AccountService implements AccountServiceInterface {
     @Transactional
     @Override
     public void addAccount(AccountDTO accountDTO) {
-        if(accountRepository.existsByEmail(accountDTO.getEmail()))
+        if (accountRepository.existsByEmail(accountDTO.getEmail()))
             return;
         Account account = Account.fromAccountDTO(accountDTO);
         accountRepository.save(account);

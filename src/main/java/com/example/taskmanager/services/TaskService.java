@@ -2,6 +2,7 @@ package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.TaskDTO;
 import com.example.taskmanager.dto.TaskToNotifyDTO;
+import com.example.taskmanager.model.Condition;
 import com.example.taskmanager.model.Project;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.Worker;
@@ -11,6 +12,8 @@ import com.example.taskmanager.repositoryJPA.ProjectRepository;
 import com.example.taskmanager.repositoryJPA.TaskRepository;
 import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +88,15 @@ public class TaskService implements TaskServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
+    public List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, Pageable pageable) {
+        List<Task> taskList = taskRepository.findTaskByConditionAndProject_Id(idProject, taskCondition, pageable);
+        List<TaskDTO> taskDTOList = new ArrayList<>();
+        taskList.forEach((a) -> taskDTOList.add(a.toTaskDTO()));
+        return taskDTOList;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public TaskDTO getTask(Long id) {
         var taskOptional = taskRepository.findById(id);
         TaskDTO taskDTO = new TaskDTO();
@@ -94,6 +106,7 @@ public class TaskService implements TaskServiceInterface {
         }
         return taskDTO;
     }
+
 
     @Transactional(readOnly = true)
     @Override

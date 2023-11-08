@@ -3,11 +3,9 @@ package com.example.taskmanager.controllers;
 
 import com.example.taskmanager.dto.PageCountDTO;
 import com.example.taskmanager.dto.ProjectDTO;
-import com.example.taskmanager.dto.TaskDTO;
 import com.example.taskmanager.model.Condition;
 import com.example.taskmanager.services.ProjectService;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
@@ -45,20 +43,6 @@ public class ProjectController {
     @GetMapping("project")
     public ProjectDTO getProject(@RequestParam(name = "idProject", required = false) Long id) {
         return projectService.getProject(id);
-    }
-
-    @GetMapping("project_tasks") //Tasks are shared on three columns: to Work, in Progress, Done.
-    public List<TaskDTO> getProjectTasks(@RequestParam(name = "idProject", required = false) Long id, //I'a not sure in witch controller this must be (in Project or Task)
-                                         @RequestParam(required = false) Condition taskCondition,
-                                         @RequestParam(required = false, defaultValue = "0") Integer page) {
-        return projectService.getProjectTasks(id, taskCondition,
-                (Pageable) PageRequest.of(
-                        page,
-                        PAGE_SIZE,
-                        Sort.Direction.DESC,
-                        "id")
-        );
-
     }
 
     @PostMapping("add_project")//TODO

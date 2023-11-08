@@ -2,7 +2,9 @@ package com.example.taskmanager.model;
 
 import com.example.taskmanager.dto.ProjectDTO;
 import com.example.taskmanager.dto.TaskDTO;
+
 import javax.persistence.*;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -44,7 +46,7 @@ public class Project {
     public ProjectDTO toProjectDTO() {
         List<TaskDTO> taskDTOList = new ArrayList<>();
         tasks.forEach((a) -> taskDTOList.add(a.toTaskDTO()));
-        return new ProjectDTO(id, name, condition, taskDTOList);
+        return new ProjectDTO(id, name, condition);
     }
 
     public void addTaskToProject(Task task) {

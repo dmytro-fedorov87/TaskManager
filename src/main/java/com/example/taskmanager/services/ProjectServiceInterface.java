@@ -1,7 +1,6 @@
 package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.ProjectDTO;
-import com.example.taskmanager.dto.TaskDTO;
 import com.example.taskmanager.model.Condition;
 
 import java.awt.print.Pageable;
@@ -17,7 +16,6 @@ public interface ProjectServiceInterface {
     List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable);
 
     ProjectDTO getProject(Long id);
-    List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, Pageable pageable);
 
     Long countProjects(String email, Condition con);
 

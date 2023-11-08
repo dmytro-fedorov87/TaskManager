@@ -12,8 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    //List<Task> findTaskByProject(String nameProject, Pageable pageable);
-
 
     List<Task> findTaskByConditionAndProject_Id(Long idProject, Condition condition, Pageable pageable);
 

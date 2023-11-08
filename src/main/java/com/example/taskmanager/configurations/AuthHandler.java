@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
+
 @Component
 public class AuthHandler implements AuthenticationSuccessHandler {
     private final AccountService accountService;
@@ -28,9 +29,9 @@ public class AuthHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException {
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
         OAuth2User user = token.getPrincipal();
-        Map<String,Object> attributes = user.getAttributes();
+        Map<String, Object> attributes = user.getAttributes();
         AccountDTO accountDTO = AccountDTO.of(
-                (String)attributes.get("name"),
+                (String) attributes.get("name"),
                 (String) attributes.get("email"),
                 (String) attributes.get("picture")
         );
