@@ -3,9 +3,12 @@ package com.example.taskmanager.controllers;
 
 import com.example.taskmanager.dto.PageCountDTO;
 import com.example.taskmanager.dto.ProjectDTO;
+import com.example.taskmanager.dto.ResultDTOPac.ResultDTO;
+import com.example.taskmanager.dto.ResultDTOPac.SuccessResultDTO;
 import com.example.taskmanager.model.Condition;
 import com.example.taskmanager.services.ProjectService;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +52,10 @@ public class ProjectController {
     public ResponseEntity<ResultDTO> addProject(OAuth2AuthenticationToken token,
                                                 @RequestBody ProjectDTO projectDTO) {
 
-        return new ResponseEntity<>();
+
+        return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
+
 
     @PostMapping("delete_project")//TODO
     public ResponseEntity<ResultDTO> deleteProjects(
