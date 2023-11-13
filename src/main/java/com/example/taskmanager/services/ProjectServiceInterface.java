@@ -7,11 +7,11 @@ import java.awt.print.Pageable;
 import java.util.List;
 
 public interface ProjectServiceInterface {
-    void addProject(ProjectDTO projectDTO, String email);
+    void addProject(String name, String email);
 
     void deleteProject(List<Long> idList);
 
-    void updateProjectName(ProjectDTO projectDTO);
+    void updateProjectName(Long idProject, String newName);
 
     List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable);
 
@@ -19,4 +19,5 @@ public interface ProjectServiceInterface {
 
     Long countProjects(String email, Condition con);
 
+    void changeCondition(Long id);
 }

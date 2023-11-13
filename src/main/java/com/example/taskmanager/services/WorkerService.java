@@ -48,23 +48,22 @@ public class WorkerService implements WorkerServiceInterface {
     @Transactional
     @Override
     public void updateWorker(WorkerDTO workerDTO) {
-        var workerOptional = workerRepository.findById(workerDTO.getId());
+        /*var workerOptional = workerRepository.findById(workerDTO.getId());
         if (workerOptional.isPresent()) {
             var worker = workerOptional.get();
             worker = Worker.of(workerDTO.getName(), workerDTO.getQualification(), workerDTO.getEmail());
             workerRepository.save(worker);
-        }
+        }*/
+        Worker w = getWorkerFromOptional(workerDTO.getId());//TODO
+        w = Worker.of(workerDTO.getName(), workerDTO.getQualification(), workerDTO.getEmail());
+        workerRepository.save(w);
 
     }
 
     @Transactional(readOnly = true)
     @Override
     public WorkerDTO getWorker(Long id) {
-        var workerOptional = workerRepository.findById(id);
-        Worker worker = new Worker();
-        if (workerOptional.isPresent()) {
-            worker = workerOptional.get();
-        }
+        Worker worker = getWorkerFromOptional(id);
         return worker.toWorkerDTO();
 
     }
@@ -83,5 +82,14 @@ public class WorkerService implements WorkerServiceInterface {
     public TaskForWorkerDTO getTaskForWorker(Long idTask) {
 
         return workerRepository.findTaskByIdTask(idTask); //TODO
+    }
+
+    private Worker getWorkerFromOptional(Long id) {
+        var workerOptional = workerRepository.findById(id);
+        Worker worker = new Worker();
+        if (workerOptional.isPresent()) {
+            worker = workerOptional.get();
+        }
+        return worker;
     }
 }

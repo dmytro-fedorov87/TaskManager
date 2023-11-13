@@ -35,11 +35,11 @@ public class TaskService implements TaskServiceInterface {
     public void addTask(TaskDTO taskDTO, Long idProject) {
         var workerOptional = workerRepository.findById(taskDTO.getIdWorker());
         var projectOptional = projectRepository.findById(idProject);
-        if (projectOptional.isEmpty()) {
+        if (projectOptional.isPresent()) {
             return;
         }
         Project project = projectOptional.get();
-        if (workerOptional.isEmpty()) {
+        if (workerOptional.isPresent()) {
             return;
         }
         Worker worker = workerOptional.get();
@@ -59,19 +59,19 @@ public class TaskService implements TaskServiceInterface {
 
     @Transactional
     @Override
-    public void updateTask(TaskDTO taskDTO, Long idProject) { // TODO
+    public void updateTask(TaskDTO taskDTO, Long idProject) { //TODO
         var taskOptional = taskRepository.findById(taskDTO.getId()); // check correct working this method
-        if (taskOptional.isEmpty()) {
+        if (taskOptional.isPresent()) {
             return;
         }
         var task = taskOptional.get();
         var workerOptional = workerRepository.findById(taskDTO.getIdWorker());
         var projectOptional = projectRepository.findById(idProject);
-        if (projectOptional.isEmpty()) {
+        if (projectOptional.isPresent()) {
             return;
         }
         Project project = projectOptional.get();
-        if (workerOptional.isEmpty()) {
+        if (workerOptional.isPresent()) {
             return;
         }
         Worker worker = workerOptional.get();

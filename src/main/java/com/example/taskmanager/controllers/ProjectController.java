@@ -35,7 +35,7 @@ public class ProjectController {
                                                     @RequestParam(required = false, defaultValue = "0") Integer page) {
         String email = getEmail(token);
         return projectService.getProjects(email, con,
-                (Pageable) PageRequest.of(page, PAGE_SIZE)); //PageRequest.of(page, PAGE_SIZE, Sort.Direction.DESC,"id" );
+                (Pageable) PageRequest.of(page, PAGE_SIZE));
     }
 
     @GetMapping("count_project")
@@ -50,26 +50,26 @@ public class ProjectController {
         return projectService.getProject(id);
     }
 
-    @PostMapping("add_project")//TODO
+    @PostMapping("add_project")
     public ResponseEntity<ResultDTO> addProject(OAuth2AuthenticationToken token,
-                                                @RequestBody ProjectDTO projectDTO) {
-
-
+                                                @RequestParam(required = false) String name) { //@RequestBody ProjectDTO projectDTO
+        String email = getEmail(token);
+        projectService.addProject(name, email);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
 
-    @PostMapping("delete_project")//TODO
+    @PostMapping("delete_project")
     public ResponseEntity<ResultDTO> deleteProjects(
             @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
-
+        projectService.deleteProject(List.of(idList)); // check how method list.of() is working
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @PostMapping("update_project")//TODO
+    @PostMapping("update_project")//I need to check rename project in Account when we update ProjectName
     public ResponseEntity<ResultDTO> updateProjectName(@RequestParam(name = "idProject", required = false) Long id,
-                                                       @RequestParam(required = false) String name) {
-
+                                                       @RequestParam(required = false) String newName) {
+        projectService.updateProjectName(id, newName);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 

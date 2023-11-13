@@ -27,11 +27,13 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Transactional
     @Override
-    public void addProject(ProjectDTO projectDTO, String email) {
-        if (projectRepository.existsByName(projectDTO.getName()))
+    public void addProject(String name, String email) {
+        if (projectRepository.existsByName(name))
             return;
+        Project project = new Project();
+        project.setName(name);
+        project.setCondition(Condition.IN_RPOGRES);
 
-        Project project = Project.fromProjectDTO(projectDTO);
         Account account = accountRepository.findByEmail(email);
         account.addProjectToAccount(project);
         accountRepository.save(account);
@@ -46,14 +48,11 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Transactional
     @Override
-    public void updateProjectName(ProjectDTO projectDTO) { //TODO
-        var projectOptional = projectRepository.findById(projectDTO.getId()); // need to remade, requestParam String name, not DTO
-        Project project = new Project();
-        if (projectOptional.isPresent()) {
-            project = projectOptional.get();
-        }
-        project.setName(projectDTO.getName());
+    public void updateProjectName(Long id, String newName) {
+        Project project = getProjectFromOptional(id); //my method
+        project.setName(newName);
         projectRepository.save(project);
+
     }
 
     @Transactional(readOnly = true)
@@ -71,12 +70,7 @@ public class ProjectService implements ProjectServiceInterface {
     @Transactional(readOnly = true)
     @Override
     public ProjectDTO getProject(Long id) {
-        var projectOptional = projectRepository.findById(id);
-        Project project = new Project();
-        if (projectOptional.isPresent()) {
-            project = projectOptional.get();
-
-        }
+        Project project = getProjectFromOptional(id);
         return project.toProjectDTO();
     }
 
@@ -84,5 +78,23 @@ public class ProjectService implements ProjectServiceInterface {
     @Override
     public Long countProjects(String email, Condition con) {
         return projectRepository.countByAccountEmailAndCondition(email, con);
+    }
+
+    @Transactional
+    @Override
+    public void changeCondition(Long id) { //TODO
+        Project project = getProjectFromOptional(id);
+        project.setCondition(Condition.DONE);// When We update Task we check ALL current project's Tasks,
+        projectRepository.save(project);     // if they ALL are "Done" -> switch on this method
+    }
+
+
+    private Project getProjectFromOptional(Long id) {
+        var projectOptional = projectRepository.findById(id);
+        Project project = new Project();
+        if (projectOptional.isPresent()) {
+            project = projectOptional.get();
+        }
+        return project;
     }
 }
