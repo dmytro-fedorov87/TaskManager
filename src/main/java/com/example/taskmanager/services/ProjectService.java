@@ -58,7 +58,7 @@ public class ProjectService implements ProjectServiceInterface {
     @Transactional(readOnly = true)
     @Override
     public List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable) {
-        List<Project> projectList = projectRepository.findByAccountEmail(email, pageable);
+        List<Project> projectList = projectRepository.findByAccountEmail(email);
         List<ProjectDTO> projectDTOList = projectList.stream().
                 filter(a -> a.getCondition().equals(condition)).
                 map((a) -> a.toProjectDTO()).

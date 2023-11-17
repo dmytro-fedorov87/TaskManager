@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     boolean existsByName(String name);
 
-    List<Project> findByAccountEmail(String email, Pageable pageable);
+    List<Project> findByAccountEmail(String email);
 
     Long countByAccountEmailAndCondition(String email, Condition con);
 

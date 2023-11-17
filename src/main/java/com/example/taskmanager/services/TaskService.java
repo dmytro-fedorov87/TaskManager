@@ -89,7 +89,7 @@ public class TaskService implements TaskServiceInterface {
     @Transactional(readOnly = true)
     @Override
     public List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, Pageable pageable) {
-        List<Task> taskList = taskRepository.findTaskByConditionAndProject_Id(idProject, taskCondition, pageable);
+        List<Task> taskList = taskRepository.findTaskByConditionAndProject_Id(idProject, taskCondition);
         List<TaskDTO> taskDTOList = new ArrayList<>();
         taskList.forEach((a) -> taskDTOList.add(a.toTaskDTO()));
         return taskDTOList;

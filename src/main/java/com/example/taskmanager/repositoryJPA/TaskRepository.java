@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findTaskByConditionAndProject_Id(Long idProject, Condition condition, Pageable pageable);
+    List<Task> findTaskByConditionAndProject_Id(Long idProject, Condition condition);
 
     @Query("SELECT NEW com.example.taskmanager.dto.TaskToNotifyDTO(t.name, w.email, t.text, t.dateStart)" +
             "FROM Worker w, Task t WHERE t.dateStart >= :from AND t.dateStart < :to")

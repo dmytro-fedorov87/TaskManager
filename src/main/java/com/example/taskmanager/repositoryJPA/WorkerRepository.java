@@ -13,7 +13,7 @@ import java.util.List;
 public interface WorkerRepository extends JpaRepository<Worker, Long> {
     boolean existsByEmail(String email);
 
-    List<Task> findByEmail(String email, Pageable pageable);
+    List<Task> findByEmail(String email);
 
     @Query("SELECT new com.example.taskmanager.dto.TaskForWorkerDTO(t.id, t.name, t.text, t.condition, t.project.name)" +
             "FROM Worker w, Task t WHERE t.id = :id")

@@ -72,7 +72,7 @@ public class WorkerService implements WorkerServiceInterface {
     @Override
     public List<TaskForWorkerDTO> getTasksForWorker(String email, Pageable pageable) {
         List<TaskForWorkerDTO> taskForWorkerDTOList = new ArrayList<>();
-        List<Task> tasks = workerRepository.findByEmail(email, pageable);
+        List<Task> tasks = workerRepository.findByEmail(email);
         tasks.forEach((a) -> taskForWorkerDTOList.add(a.toTaskForWorkerDTO()));
         return taskForWorkerDTOList;
     }
