@@ -16,4 +16,6 @@ public class AccountController {
         String picture = (String) ourAttributes.get("picture");
         return AccountDTO.of(name, email, picture);
     }
+
+
 }
