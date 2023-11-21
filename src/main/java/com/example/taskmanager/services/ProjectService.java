@@ -5,11 +5,11 @@ import com.example.taskmanager.model.Account;
 import com.example.taskmanager.model.Condition;
 import com.example.taskmanager.model.Project;
 import com.example.taskmanager.repositoryJPA.AccountRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.taskmanager.repositoryJPA.ProjectRepository;
 
-import java.awt.print.Pageable;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,7 +57,7 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable) {
+    public List<ProjectDTO> getProjects(String email, Condition condition, PageRequest pageable) {
         List<Project> projectList = projectRepository.findByAccountEmail(email);
         List<ProjectDTO> projectDTOList = projectList.stream().
                 filter(a -> a.getCondition().equals(condition)).

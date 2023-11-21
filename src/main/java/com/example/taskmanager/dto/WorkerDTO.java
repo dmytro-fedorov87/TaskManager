@@ -13,6 +13,12 @@ public class WorkerDTO {
         this.qualification = qualification;
     }
 
+    public WorkerDTO(String email, String name, String qualification) {
+        this.email = email;
+        this.name = name;
+        this.qualification = qualification;
+    }
+
     public Long getId() {
         return id;
     }

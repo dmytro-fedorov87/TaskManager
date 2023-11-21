@@ -6,13 +6,11 @@ import com.example.taskmanager.dto.TaskDTO;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Data
 public class Project {
     @Id
@@ -30,6 +28,9 @@ public class Project {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    public Project() {
+    }
 
     public Project(String name, Condition condition) {
         this.name = name;

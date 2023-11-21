@@ -3,14 +3,12 @@ package com.example.taskmanager.model;
 import com.example.taskmanager.dto.WorkerDTO;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Data
 public class Worker {
     @Id
@@ -27,6 +25,9 @@ public class Worker {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    public Worker() {
+    }
 
     private Worker(String name, String qualification, String email) {
         this.name = name;

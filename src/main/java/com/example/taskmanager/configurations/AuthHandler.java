@@ -1,4 +1,4 @@
-package com.example.taskmanager.configurations;
+/*package com.example.taskmanager.configurations;
 
 import com.example.taskmanager.dto.AccountDTO;
 import com.example.taskmanager.services.AccountService;
@@ -39,4 +39,4 @@ public class AuthHandler implements AuthenticationSuccessHandler {
         httpServletResponse.sendRedirect("/");
     }
 
-}
+}*/

@@ -2,31 +2,38 @@ package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.TaskForWorkerDTO;
 import com.example.taskmanager.dto.WorkerDTO;
+import com.example.taskmanager.model.Account;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.Worker;
+import com.example.taskmanager.repositoryJPA.AccountRepository;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class WorkerService implements WorkerServiceInterface {
     private final WorkerRepository workerRepository;
+    private final AccountRepository accountRepository;
 
-    public WorkerService(WorkerRepository workerRepository) {
+    public WorkerService(WorkerRepository workerRepository, AccountRepository accountRepository) {
         this.workerRepository = workerRepository;
+        this.accountRepository = accountRepository;
     }
 
     @Transactional
     @Override
-    public void addWorker(WorkerDTO workerDTO) {
+    public void addWorker(WorkerDTO workerDTO, String emailToken) {
         if (workerRepository.existsByEmail(workerDTO.getEmail()))
             return;
         Worker worker = Worker.fromWorkerDTO(workerDTO);
+        Account account = accountRepository.findByEmail(emailToken);
+        account.addWorkerToAccount(worker);
         workerRepository.save(worker);
+        accountRepository.save(account);
     }
 
     @Transactional
@@ -38,8 +45,8 @@ public class WorkerService implements WorkerServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public List<WorkerDTO> getWorkers() {
-        List<Worker> allWorkers = workerRepository.findAll();
+    public List<WorkerDTO> getWorkers(String emailToken,PageRequest pageable) {
+        List<Worker> allWorkers = workerRepository.findByAccount_Email(emailToken);
         List<WorkerDTO> result = new ArrayList<>();
         allWorkers.forEach((a) -> result.add(a.toWorkerDTO()));
         return result;
@@ -70,7 +77,7 @@ public class WorkerService implements WorkerServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public List<TaskForWorkerDTO> getTasksForWorker(String email, Pageable pageable) {
+    public List<TaskForWorkerDTO> getTasksForWorker(String email, PageRequest pageable) {
         List<TaskForWorkerDTO> taskForWorkerDTOList = new ArrayList<>();
         List<Task> tasks = workerRepository.findByEmail(email);
         tasks.forEach((a) -> taskForWorkerDTOList.add(a.toTaskForWorkerDTO()));

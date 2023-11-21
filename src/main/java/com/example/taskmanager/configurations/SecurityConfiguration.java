@@ -8,28 +8,29 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 public class SecurityConfiguration {
-    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    //private final AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    public SecurityConfiguration(AuthenticationSuccessHandler authenticationSuccessHandler) {
-        this.authenticationSuccessHandler = authenticationSuccessHandler;
-    }
+   // public SecurityConfiguration(AuthenticationSuccessHandler authenticationSuccessHandler) {
+     //   this.authenticationSuccessHandler = authenticationSuccessHandler;
+   // }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
-                .oauth2Login()
-                .loginPage("/login.html")
-                .successHandler(authenticationSuccessHandler)
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                 .antMatchers()//("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout")
+                 .permitAll()
+                 .anyRequest()
+                .permitAll();
+                //.authenticated()
+                //.and()
+                //.oauth2Login()
+                //.loginPage("/login.html")
+                //.successHandler(authenticationSuccessHandler)
+                //.and()
+               // .logout()
+               //.logoutUrl("/logout")
+                //.logoutSuccessUrl("/");
         return http.build();
     }
 }

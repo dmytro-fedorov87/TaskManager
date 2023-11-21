@@ -6,12 +6,11 @@ import com.example.taskmanager.dto.TaskForWorkerDTO;
 import javax.persistence.*;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
 @Data
 @Table(name = "Tasks")
 public class Task {
@@ -33,6 +32,9 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "worker_id")
     private Worker worker;
+
+    public Task() {
+    }
 
     public Task(String name, Condition condition, String text, Date dataStart) {
         this.name = name;

@@ -13,10 +13,12 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.print.Pageable;
 import java.util.List;
 
+@RestController
 public class TaskController {
     private static final int PAGE_SIZE = 5;
     private final TaskService taskService;
@@ -31,7 +33,7 @@ public class TaskController {
                                          @RequestParam(required = false) Condition taskCondition,
                                          @RequestParam(required = false, defaultValue = "0") Integer page) {
         return taskService.getProjectTasks(id, taskCondition,
-                (Pageable) PageRequest.of(
+                 PageRequest.of(
                         page,
                         PAGE_SIZE,
                         Sort.Direction.DESC,
@@ -39,7 +41,6 @@ public class TaskController {
         );
 
     }
-
 
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

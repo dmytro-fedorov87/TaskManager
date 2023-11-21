@@ -1,6 +1,7 @@
 package com.example.taskmanager.repositoryJPA;
 
 import com.example.taskmanager.dto.TaskForWorkerDTO;
+import com.example.taskmanager.dto.WorkerDTO;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.Worker;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public interface WorkerRepository extends JpaRepository<Worker, Long> {
     boolean existsByEmail(String email);
+
+    List<Worker> findByAccount_Email(String email);
 
     List<Task> findByEmail(String email);
 

@@ -2,8 +2,8 @@ package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.ProjectDTO;
 import com.example.taskmanager.model.Condition;
+import org.springframework.data.domain.PageRequest;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 public interface ProjectServiceInterface {
@@ -13,7 +13,7 @@ public interface ProjectServiceInterface {
 
     void updateProjectName(Long idProject, String newName);
 
-    List<ProjectDTO> getProjects(String email, Condition condition, Pageable pageable);
+    List<ProjectDTO> getProjects(String email, Condition condition, PageRequest pageable);
 
     ProjectDTO getProject(Long id);
 
