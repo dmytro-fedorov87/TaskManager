@@ -6,6 +6,7 @@ import com.example.taskmanager.model.Condition;
 import com.example.taskmanager.model.Project;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.Worker;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.taskmanager.repositoryJPA.ProjectRepository;
@@ -88,7 +89,7 @@ public class TaskService implements TaskServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, Pageable pageable) {
+    public List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, PageRequest pageable) {
         List<Task> taskList = taskRepository.findTaskByConditionAndProject_Id(idProject, taskCondition);
         List<TaskDTO> taskDTOList = new ArrayList<>();
         taskList.forEach((a) -> taskDTOList.add(a.toTaskDTO()));
