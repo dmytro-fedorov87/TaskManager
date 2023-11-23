@@ -43,12 +43,15 @@ public class ProjectService implements ProjectServiceInterface {
     @Transactional
     @Override
     public void deleteProject(List<Long> idList) {
+
         idList.forEach((a) -> projectRepository.deleteById(a));
     }
 
     @Transactional
     @Override
     public void updateProjectName(Long id, String newName) {
+        if (projectRepository.existsByName(newName))
+            return;
         Project project = getProjectFromOptional(id); //my method
         project.setName(newName);
         projectRepository.save(project);

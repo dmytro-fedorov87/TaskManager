@@ -66,7 +66,7 @@ public class ProjectController {
     @GetMapping("delete_project")
     public ResponseEntity<ResultDTO> deleteProjects(
             @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
-        projectService.deleteProject(List.of(idList)); // check how method list.of() is working
+        projectService.deleteProject(List.of(idList));
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
