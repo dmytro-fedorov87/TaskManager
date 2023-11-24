@@ -47,7 +47,7 @@ public class ProjectController {
         return PageCountDTO.of(projectService.countProjects(email, con), PAGE_SIZE);
     }
 
-    @GetMapping("project") //it's work
+    @GetMapping("get_project") //it's work
     public ProjectDTO getProject(@RequestParam(name = "idProject", required = false) Long id) {
         return projectService.getProject(id);
     }

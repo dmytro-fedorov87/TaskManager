@@ -45,7 +45,7 @@ public class WorkerService implements WorkerServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public List<WorkerDTO> getWorkers(String emailToken,PageRequest pageable) {
+    public List<WorkerDTO> getWorkers(String emailToken, PageRequest pageable) {
         List<Worker> allWorkers = workerRepository.findByAccount_Email(emailToken);
         List<WorkerDTO> result = new ArrayList<>();
         allWorkers.forEach((a) -> result.add(a.toWorkerDTO()));
@@ -55,14 +55,10 @@ public class WorkerService implements WorkerServiceInterface {
     @Transactional
     @Override
     public void updateWorker(WorkerDTO workerDTO) {
-        /*var workerOptional = workerRepository.findById(workerDTO.getId());
-        if (workerOptional.isPresent()) {
-            var worker = workerOptional.get();
-            worker = Worker.of(workerDTO.getName(), workerDTO.getQualification(), workerDTO.getEmail());
-            workerRepository.save(worker);
-        }*/
-        Worker w = getWorkerFromOptional(workerDTO.getId());//TODO
-        w = Worker.of(workerDTO.getName(), workerDTO.getQualification(), workerDTO.getEmail());
+        Worker w = getWorkerFromOptional(workerDTO.getId());// my method
+        w.setName(workerDTO.getName());
+        w.setEmail(workerDTO.getEmail());
+        w.setQualification(workerDTO.getQualification());
         workerRepository.save(w);
 
     }
@@ -77,7 +73,7 @@ public class WorkerService implements WorkerServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public List<TaskForWorkerDTO> getTasksForWorker(String email, PageRequest pageable) {
+    public List<TaskForWorkerDTO> getTaskListForWorker(String email, PageRequest pageable) {
         List<TaskForWorkerDTO> taskForWorkerDTOList = new ArrayList<>();
         List<Task> tasks = workerRepository.findByEmail(email);
         tasks.forEach((a) -> taskForWorkerDTOList.add(a.toTaskForWorkerDTO()));
@@ -86,7 +82,7 @@ public class WorkerService implements WorkerServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public TaskForWorkerDTO getTaskForWorker(Long idTask) {
+    public TaskForWorkerDTO getTaskForWorker(Long idTask) {// check how it work
 
         return workerRepository.findTaskByIdTask(idTask); //TODO
     }

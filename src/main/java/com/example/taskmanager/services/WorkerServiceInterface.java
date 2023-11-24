@@ -18,7 +18,7 @@ public interface WorkerServiceInterface {
 
     WorkerDTO getWorker(Long id);
 
-    List<TaskForWorkerDTO> getTasksForWorker(String email, PageRequest pageable);
+    List<TaskForWorkerDTO> getTaskListForWorker(String email, PageRequest pageable);
 
     TaskForWorkerDTO getTaskForWorker(Long idTask);
 

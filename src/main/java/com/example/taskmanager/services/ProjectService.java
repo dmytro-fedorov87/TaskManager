@@ -65,7 +65,7 @@ public class ProjectService implements ProjectServiceInterface {
         List<ProjectDTO> projectDTOList = projectList.stream().
                 filter(a -> a.getCondition().equals(condition)).
                 map((a) -> a.toProjectDTO()).
-                sorted(Comparator.comparing(ProjectDTO::getId).reversed()).
+                sorted(Comparator.comparing(ProjectDTO::getId).reversed()).//New project contain in top of list on frontend
                 collect(Collectors.toList());
         return projectDTOList;
     }
