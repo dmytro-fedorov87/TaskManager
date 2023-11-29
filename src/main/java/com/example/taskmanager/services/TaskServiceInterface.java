@@ -5,7 +5,6 @@ import com.example.taskmanager.dto.TaskToNotifyDTO;
 import com.example.taskmanager.model.Condition;
 import org.springframework.data.domain.PageRequest;
 
-import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
 

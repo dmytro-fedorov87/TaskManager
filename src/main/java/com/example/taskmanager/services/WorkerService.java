@@ -6,6 +6,7 @@ import com.example.taskmanager.model.Account;
 import com.example.taskmanager.model.Task;
 import com.example.taskmanager.model.Worker;
 import com.example.taskmanager.repositoryJPA.AccountRepository;
+import com.example.taskmanager.repositoryJPA.TaskRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +20,12 @@ public class WorkerService implements WorkerServiceInterface {
     private final WorkerRepository workerRepository;
     private final AccountRepository accountRepository;
 
-    public WorkerService(WorkerRepository workerRepository, AccountRepository accountRepository) {
+    private final TaskRepository taskRepository;
+
+    public WorkerService(WorkerRepository workerRepository, AccountRepository accountRepository, TaskRepository taskRepository) {
         this.workerRepository = workerRepository;
         this.accountRepository = accountRepository;
+        this.taskRepository = taskRepository;
     }
 
     @Transactional
@@ -75,7 +79,7 @@ public class WorkerService implements WorkerServiceInterface {
     @Override
     public List<TaskForWorkerDTO> getTaskListForWorker(String email, PageRequest pageable) {
         List<TaskForWorkerDTO> taskForWorkerDTOList = new ArrayList<>();
-        List<Task> tasks = workerRepository.findByEmail(email);
+        List<Task> tasks = taskRepository.findByWorker_Email(email);
         tasks.forEach((a) -> taskForWorkerDTOList.add(a.toTaskForWorkerDTO()));
         return taskForWorkerDTOList;
     }

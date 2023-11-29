@@ -4,7 +4,6 @@ import com.example.taskmanager.dto.TaskForWorkerDTO;
 import com.example.taskmanager.dto.WorkerDTO;
 import org.springframework.data.domain.PageRequest;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 public interface WorkerServiceInterface {
