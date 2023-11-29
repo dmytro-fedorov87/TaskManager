@@ -1,12 +1,19 @@
 package com.example.taskmanager.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WorkerDTO {
     private Long id;
     private String email;
     private String name;
     private String qualification;
 
-    public WorkerDTO(Long id, String email, String name, String qualification) {
+    @JsonCreator
+    public WorkerDTO(@JsonProperty Long id,
+                     @JsonProperty(required = true) String email,
+                     @JsonProperty(required = true) String name,
+                     @JsonProperty(required = true) String qualification) {
         this.id = id;
         this.email = email;
         this.name = name;
