@@ -1,7 +1,6 @@
 package com.example.taskmanager.model;
 
 import com.example.taskmanager.dto.ProjectDTO;
-import com.example.taskmanager.dto.TaskDTO;
 
 import javax.persistence.*;
 
@@ -37,16 +36,8 @@ public class Project {
         this.condition = condition;
     }
 
-    public static Project fromProjectDTO(ProjectDTO projectDTO) {
-        Project project = new Project();
-        project.setName(projectDTO.getName());
-        project.setCondition(projectDTO.getCondition());
-        return project;
-    }
 
     public ProjectDTO toProjectDTO() {
-        List<TaskDTO> taskDTOList = new ArrayList<>();
-        tasks.forEach((a) -> taskDTOList.add(a.toTaskDTO()));
         return new ProjectDTO(id, name, condition);
     }
 

@@ -91,7 +91,13 @@ public class WorkerService implements WorkerServiceInterface {
         return workerRepository.findTaskByIdTask(idTask); //TODO
     }
 
-    private Worker getWorkerFromOptional(Long id) {
+    @Transactional(readOnly = true)
+    @Override
+    public Long countByAccount_Email(String email) {
+        return workerRepository.countByAccount_Email(email);
+    }
+
+    protected Worker getWorkerFromOptional(Long id) {
         var workerOptional = workerRepository.findById(id);
         Worker worker = new Worker();
         if (workerOptional.isPresent()) {

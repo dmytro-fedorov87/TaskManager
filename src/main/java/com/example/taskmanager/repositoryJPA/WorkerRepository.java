@@ -13,6 +13,8 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
     List<Worker> findByAccount_Email(String email);
 
+    Long countByAccount_Email(String email);
+
     @Query("SELECT new com.example.taskmanager.dto.TaskForWorkerDTO(t.id, t.name, t.text, t.condition, t.project.name)" +
             "FROM Worker w, Task t WHERE t.id = :id")
         //Check how it work.

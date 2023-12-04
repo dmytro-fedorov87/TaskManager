@@ -52,8 +52,7 @@ public class Task {
     }
 
     public static Task fromTaskDTO(TaskDTO taskDTO) {
-        Task task = Task.of(taskDTO.getName(), taskDTO.getText(), taskDTO.getDateStart(), taskDTO.getCondition());
-        return task;
+        return Task.of(taskDTO.getName(), taskDTO.getText(), taskDTO.getDateStart(), taskDTO.getCondition());
     }
 
     public TaskDTO toTaskDTO() {

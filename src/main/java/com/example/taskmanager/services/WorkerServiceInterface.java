@@ -11,7 +11,7 @@ public interface WorkerServiceInterface {
 
     void deleteWorker(List<Long> idList);
 
-    List<WorkerDTO> getWorkers(String emailToken,PageRequest pageable);
+    List<WorkerDTO> getWorkers(String emailToken, PageRequest pageable);
 
     void updateWorker(WorkerDTO workerDTO);
 
@@ -20,5 +20,7 @@ public interface WorkerServiceInterface {
     List<TaskForWorkerDTO> getTaskListForWorker(String email, PageRequest pageable);
 
     TaskForWorkerDTO getTaskForWorker(Long idTask);
+
+    Long countByAccount_Email(String email);
 
 }

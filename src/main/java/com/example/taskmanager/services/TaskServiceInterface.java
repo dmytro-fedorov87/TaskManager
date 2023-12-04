@@ -14,11 +14,13 @@ public interface TaskServiceInterface {
     void deleteTask(List<Long> idList);
 
 
-    void updateTask(TaskDTO taskDTO, Long idProject);
+    void updateTask(TaskDTO taskDTO);
 
     TaskDTO getTask(Long id);
 
     List<TaskToNotifyDTO> getTasksToNotify(Date now);
 
     List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, PageRequest pageable);
+
+    Long countTask(Condition taskCondition, Long idProject);
 }

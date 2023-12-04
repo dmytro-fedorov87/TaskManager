@@ -21,15 +21,18 @@ public class TaskDTO {
     private Long idWorker;
 
     @JsonCreator
-    public TaskDTO(@JsonProperty(required = true) Date dateStart,
-                   @JsonProperty(required = true) Condition condition,
+    public TaskDTO(@JsonProperty String name,
                    @JsonProperty(required = true) String text,
-                   @JsonProperty(required = true) Long idWorker,
-                   @JsonProperty(required = true) String name) {
+                   @JsonProperty(required = true) Condition condition,
+                   @JsonProperty(required = true) Date dateStart,
+                   @JsonProperty(required = true) Long idProject,
+                   @JsonProperty Long idWorker
+    ) {
         this.name = name;
         this.text = text;
         this.condition = condition;
         this.dateStart = dateStart;
+        this.idProject = idProject;
         this.idWorker = idWorker;
     }
 

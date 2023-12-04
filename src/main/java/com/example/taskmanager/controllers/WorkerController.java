@@ -1,5 +1,6 @@
 package com.example.taskmanager.controllers;
 
+import com.example.taskmanager.dto.PageCountDTO;
 import com.example.taskmanager.dto.ResultDTOPac.BadResultDTO;
 import com.example.taskmanager.dto.ResultDTOPac.ResultDTO;
 import com.example.taskmanager.dto.ResultDTOPac.SuccessResultDTO;
@@ -89,6 +90,12 @@ public class WorkerController {
     public TaskForWorkerDTO getTaskWorker(
             @RequestParam(required = false) Long idTask) {
         return workerService.getTaskForWorker(idTask);
+    }
+    @GetMapping("count_worker") // Temporary
+    public PageCountDTO countWorkers(//OAuth2AuthenticationToken token,
+                              @RequestParam String email){
+        //String email = getEmail(token);
+        return new PageCountDTO(workerService.countByAccount_Email(email), PAGE_SIZE);
     }
 
     private String getEmail(OAuth2AuthenticationToken token) {

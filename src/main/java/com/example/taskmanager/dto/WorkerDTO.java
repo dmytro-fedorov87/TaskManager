@@ -10,9 +10,9 @@ public class WorkerDTO {
     private String qualification;
 
     @JsonCreator
-    public WorkerDTO(@JsonProperty Long id,
-                     @JsonProperty(required = true) String email,
-                     @JsonProperty(required = true) String name,
+    public WorkerDTO(@JsonProperty(required = true) Long id,
+                     @JsonProperty String email,
+                     @JsonProperty String name,
                      @JsonProperty(required = true) String qualification) {
         this.id = id;
         this.email = email;

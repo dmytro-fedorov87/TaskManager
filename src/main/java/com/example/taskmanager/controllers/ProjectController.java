@@ -32,7 +32,7 @@ public class ProjectController {
     @GetMapping("projects") // We have two columns with Conditions(in Progress and Done)
     public List<ProjectDTO> getProjectsByConditions(//OAuth2AuthenticationToken token,
                                                     @RequestParam String email,//it's work
-                                                    @RequestParam Condition con,//Temporary
+                                                    @RequestParam(required = false) Condition con,//Temporary
                                                     @RequestParam(required = false, defaultValue = "0") Integer page) {
         //String email = getEmail(token);
         return projectService.getProjects(email, con,

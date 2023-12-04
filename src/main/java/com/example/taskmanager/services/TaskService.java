@@ -13,7 +13,6 @@ import com.example.taskmanager.repositoryJPA.ProjectRepository;
 import com.example.taskmanager.repositoryJPA.TaskRepository;
 import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
-import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,29 +21,29 @@ import java.util.List;
 @Service
 public class TaskService implements TaskServiceInterface {
     private final TaskRepository taskRepository;
+    private final ProjectService projectService;
     private final ProjectRepository projectRepository;
+    private final WorkerService workerService;
     private final WorkerRepository workerRepository;
 
-    public TaskService(TaskRepository taskRepository, ProjectRepository projectRepository, WorkerRepository workerRepository) {
+    public TaskService(TaskRepository taskRepository, ProjectService projectService, ProjectRepository projectRepository, WorkerService workerService, WorkerRepository workerRepository) {
         this.taskRepository = taskRepository;
+        this.projectService = projectService;
         this.projectRepository = projectRepository;
+        this.workerService = workerService;
         this.workerRepository = workerRepository;
     }
 
     @Transactional
     @Override
     public void addTask(TaskDTO taskDTO, Long idProject) {
-        var workerOptional = workerRepository.findById(taskDTO.getIdWorker());
-        var projectOptional = projectRepository.findById(idProject);
-        if (projectOptional.isPresent()) {
-            return;
-        }
-        Project project = projectOptional.get();
-        if (workerOptional.isPresent()) {
-            return;
-        }
-        Worker worker = workerOptional.get();
+
+        Project project = projectService.getProjectFromOptional(idProject);
+        Worker worker = workerService.getWorkerFromOptional(taskDTO.getIdWorker());
+
         Task task = Task.fromTaskDTO(taskDTO);
+        task.setCondition(Condition.TO_WORK);
+
         worker.addTaskToWorker(task);
         workerRepository.save(worker);
         project.addTaskToProject(task);
@@ -60,30 +59,25 @@ public class TaskService implements TaskServiceInterface {
 
     @Transactional
     @Override
-    public void updateTask(TaskDTO taskDTO, Long idProject) { //TODO
-        var taskOptional = taskRepository.findById(taskDTO.getId()); // check correct working this method
-        if (taskOptional.isPresent()) {
+    public void updateTask(TaskDTO taskDTO) {
+
+        var taskOpt = taskRepository.findById(taskDTO.getId());
+        if (taskOpt.isEmpty()) {
             return;
         }
-        var task = taskOptional.get();
-        var workerOptional = workerRepository.findById(taskDTO.getIdWorker());
-        var projectOptional = projectRepository.findById(idProject);
-        if (projectOptional.isPresent()) {
-            return;
-        }
-        Project project = projectOptional.get();
-        if (workerOptional.isPresent()) {
-            return;
-        }
-        Worker worker = workerOptional.get();
-        task = Task.fromTaskDTO(taskDTO);
+        Task task = taskOpt.get();
+        task.setName(taskDTO.getName());
+        task.setCondition(taskDTO.getCondition());
+        task.setText(taskDTO.getText());
+        task.setDateStart(taskDTO.getDateStart());
+
+        Worker worker = workerService.getWorkerFromOptional(taskDTO.getIdWorker());
         worker.addTaskToWorker(task);
         workerRepository.save(worker);
+
+        Project project = projectService.getProjectFromOptional(taskDTO.getIdProject());
         project.addTaskToProject(task);
         projectRepository.save(project);
-        //TODO
-//I need to check while workerchange is happening we set new worker in Task what will happen with old Worker?
-// Task stay in old worker or not?
 
     }
 
@@ -108,6 +102,12 @@ public class TaskService implements TaskServiceInterface {
         return taskDTO;
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Long countTask(Condition taskCondition, Long idProject) {
+        return taskRepository.countByConditionAndProject_Id(taskCondition, idProject);
+    }
+
 
     @Transactional(readOnly = true)
     @Override
@@ -123,5 +123,10 @@ public class TaskService implements TaskServiceInterface {
         Date to = calendar.getTime();
 
         return taskRepository.findTaskToNotify(from, to);
+    }
+
+    private void projectConditional(Project project){
+        List<Task> taskList = project.getTasks();
+        if(taskList.forEach(a -> a.getCondition().equals(Condition.DONE)))
     }
 }

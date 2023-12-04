@@ -14,6 +14,7 @@ public class Worker {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
     private String qualification;
 
@@ -41,8 +42,7 @@ public class Worker {
 
 
     public static Worker fromWorkerDTO(WorkerDTO workerDTO) {
-        Worker worker = Worker.of(workerDTO.getName(), workerDTO.getQualification(), workerDTO.getEmail());
-        return worker;
+        return Worker.of(workerDTO.getName(), workerDTO.getQualification(), workerDTO.getEmail());
     }
 
     public WorkerDTO toWorkerDTO() {

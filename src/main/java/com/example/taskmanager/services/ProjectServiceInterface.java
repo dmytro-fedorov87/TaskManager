@@ -2,6 +2,7 @@ package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.ProjectDTO;
 import com.example.taskmanager.model.Condition;
+import com.example.taskmanager.model.Project;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface ProjectServiceInterface {
 
     Long countProjects(String email, Condition con);
 
-    void changeCondition(Long id);
+    void changeCondition(Project project);
 }

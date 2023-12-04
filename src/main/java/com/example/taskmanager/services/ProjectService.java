@@ -30,9 +30,7 @@ public class ProjectService implements ProjectServiceInterface {
     public void addProject(String name, String email) {
         if (projectRepository.existsByName(name))
             return;
-        Project project = new Project();
-        project.setName(name);
-        project.setCondition(Condition.IN_RPOGRES);
+        Project project = new Project(name, Condition.IN_RPOGRES);
 
         Account account = accountRepository.findByEmail(email);
         account.addProjectToAccount(project);
@@ -85,14 +83,13 @@ public class ProjectService implements ProjectServiceInterface {
 
     @Transactional
     @Override
-    public void changeCondition(Long id) { //TODO
-        Project project = getProjectFromOptional(id);
+    public void changeCondition(Project project) { //TODO
         project.setCondition(Condition.DONE);// When We update Task we check ALL current project's Tasks,
         projectRepository.save(project);     // if they ALL are "Done" -> switch on this method
     }
 
 
-    private Project getProjectFromOptional(Long id) {
+    protected Project getProjectFromOptional(Long id) {
         var projectOptional = projectRepository.findById(id);
         Project project = new Project();
         if (projectOptional.isPresent()) {
