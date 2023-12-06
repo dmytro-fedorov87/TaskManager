@@ -62,9 +62,9 @@ public class TaskService implements TaskServiceInterface {
     public void updateTask(TaskDTO taskDTO) {
 
         var taskOpt = taskRepository.findById(taskDTO.getId());
-        if (taskOpt.isEmpty()) {
+        if (taskOpt.isEmpty())
             return;
-        }
+
         Task task = taskOpt.get();
         task.setName(taskDTO.getName());
         task.setCondition(taskDTO.getCondition());
@@ -77,6 +77,9 @@ public class TaskService implements TaskServiceInterface {
 
         Project project = projectService.getProjectFromOptional(taskDTO.getIdProject());
         project.addTaskToProject(task);
+        projectRepository.save(project);
+
+        changeProjectConditional(project);//my method. When all project's tasks have Condition "Done" project also become with Condition "Done"
         projectRepository.save(project);
 
     }
@@ -125,8 +128,10 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.findTaskToNotify(from, to);
     }
 
-    private void projectConditional(Project project){
+    private void changeProjectConditional(Project project) {// check how it work
         List<Task> taskList = project.getTasks();
-        if(taskList.forEach(a -> a.getCondition().equals(Condition.DONE)))
+        if (taskList.stream().allMatch(a -> a.getCondition().equals(Condition.DONE))) {// if all Tasks  are "Done" returns True
+            project.setCondition(Condition.DONE);
+        }
     }
 }

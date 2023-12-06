@@ -60,12 +60,13 @@ public class ProjectService implements ProjectServiceInterface {
     @Override
     public List<ProjectDTO> getProjects(String email, Condition condition, PageRequest pageable) {
         List<Project> projectList = projectRepository.findByAccountEmail(email);
-        List<ProjectDTO> projectDTOList = projectList.stream().
+
+        return projectList.stream().
                 filter(a -> a.getCondition().equals(condition)).
                 map((a) -> a.toProjectDTO()).
                 sorted(Comparator.comparing(ProjectDTO::getId).reversed()).//New project contain in top of list on frontend
-                collect(Collectors.toList());
-        return projectDTOList;
+                        collect(Collectors.toList());
+
     }
 
     @Transactional(readOnly = true)
@@ -79,13 +80,6 @@ public class ProjectService implements ProjectServiceInterface {
     @Override
     public Long countProjects(String email, Condition con) {
         return projectRepository.countByAccountEmailAndCondition(email, con);
-    }
-
-    @Transactional
-    @Override
-    public void changeCondition(Project project) { //TODO
-        project.setCondition(Condition.DONE);// When We update Task we check ALL current project's Tasks,
-        projectRepository.save(project);     // if they ALL are "Done" -> switch on this method
     }
 
 

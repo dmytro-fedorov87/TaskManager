@@ -20,5 +20,4 @@ public interface ProjectServiceInterface {
 
     Long countProjects(String email, Condition con);
 
-    void changeCondition(Project project);
 }

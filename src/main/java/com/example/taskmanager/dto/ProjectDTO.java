@@ -2,7 +2,6 @@ package com.example.taskmanager.dto;
 
 import com.example.taskmanager.model.Condition;
 
-import java.util.List;
 
 public class ProjectDTO {
     private Long id;
