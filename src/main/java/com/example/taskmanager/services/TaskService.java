@@ -48,11 +48,14 @@ public class TaskService implements TaskServiceInterface {
         workerRepository.save(worker);
         project.addTaskToProject(task);
         projectRepository.save(project);
+
+        changeProjectConditional(project);//my method. When all project's tasks have Condition "Done" project also become with Condition "Done"
+        projectRepository.save(project);  // if not project's condition become "in progress"
     }
 
     @Transactional
     @Override
-    public void deleteTask(List<Long> idList) {
+    public void deleteTask(List<Long> idList) { //TODO
         idList.forEach((a) -> taskRepository.deleteById(a));
     }
 
@@ -87,7 +90,7 @@ public class TaskService implements TaskServiceInterface {
     @Transactional(readOnly = true)
     @Override
     public List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, PageRequest pageable) {
-        List<Task> taskList = taskRepository.findTaskByConditionAndProject_Id(idProject, taskCondition);
+        List<Task> taskList = taskRepository.findAllByConditionAndProject_Id(taskCondition, idProject);
         List<TaskDTO> taskDTOList = new ArrayList<>();
         taskList.forEach((a) -> taskDTOList.add(a.toTaskDTO()));
         return taskDTOList;
@@ -132,6 +135,6 @@ public class TaskService implements TaskServiceInterface {
         List<Task> taskList = project.getTasks();
         if (taskList.stream().allMatch(a -> a.getCondition().equals(Condition.DONE))) {// if all Tasks  are "Done" returns True
             project.setCondition(Condition.DONE);
-        }
+        } else project.setCondition(Condition.IN_PROGRESS);
     }
 }

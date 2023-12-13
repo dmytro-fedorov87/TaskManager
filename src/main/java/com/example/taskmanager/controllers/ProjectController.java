@@ -31,7 +31,7 @@ public class ProjectController {
 
     @GetMapping("projects") // We have two columns with Conditions(in Progress and Done)
     public List<ProjectDTO> getProjectsByConditions(//OAuth2AuthenticationToken token,
-                                                    @RequestParam String email,//it's work
+                                                    @RequestParam String email,
                                                     @RequestParam(required = false) Condition con,//Temporary
                                                     @RequestParam(required = false, defaultValue = "0") Integer page) {
         //String email = getEmail(token);
@@ -42,12 +42,12 @@ public class ProjectController {
     @GetMapping("count_project") //Temporary
     public PageCountDTO countProjects(//OAuth2AuthenticationToken token,
                                       @RequestParam String email,
-                                      @RequestParam(required = false) Condition con) {//it's work
+                                      @RequestParam(required = false) Condition con) {
         //String email = getEmail(token);
         return PageCountDTO.of(projectService.countProjects(email, con), PAGE_SIZE);
     }
 
-    @GetMapping("get_project") //it's work
+    @GetMapping("get_project")
     public ProjectDTO getProject(@RequestParam(name = "idProject", required = false) Long id) {
         return projectService.getProject(id);
     }
@@ -55,8 +55,8 @@ public class ProjectController {
     //it's work
     @GetMapping("add_project")//Temporary
     public ResponseEntity<ResultDTO> addProject(//OAuth2AuthenticationToken token,
-                                                @RequestParam String email,//it's work
-                                                @RequestParam(required = false) String name) { //@RequestBody ProjectDTO projectDTO
+                                                @RequestParam String email,
+                                                @RequestParam(required = false) String name) {
         //String email = getEmail(token);
         projectService.addProject(name, email);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
@@ -70,8 +70,8 @@ public class ProjectController {
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("update_project")//I need to check rename project in Account when we update ProjectName
-    public ResponseEntity<ResultDTO> updateProjectName(@RequestParam(name = "idProject", required = false) Long id,//it's work
+    @GetMapping("update_project")
+    public ResponseEntity<ResultDTO> updateProjectName(@RequestParam(name = "idProject", required = false) Long id,
                                                        @RequestParam(required = false) String newName) {
         projectService.updateProjectName(id, newName);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);

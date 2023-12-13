@@ -36,7 +36,6 @@ public class WorkerService implements WorkerServiceInterface {
         Worker worker = Worker.fromWorkerDTO(workerDTO);
         Account account = accountRepository.findByEmail(emailToken);
         account.addWorkerToAccount(worker);
-        workerRepository.save(worker);
         accountRepository.save(account);
     }
 
@@ -86,7 +85,7 @@ public class WorkerService implements WorkerServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public TaskForWorkerDTO getTaskForWorker(Long idTask) {// check how it work
+    public TaskForWorkerDTO getTaskForWorker(Long idTask) {// check how it works
 
         return workerRepository.findTaskByIdTask(idTask); //TODO
     }

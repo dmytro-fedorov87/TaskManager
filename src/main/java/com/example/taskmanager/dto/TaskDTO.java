@@ -13,7 +13,7 @@ public class TaskDTO {
     private String text;
 
     private Condition condition;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Date dateStart;
 
     private Long idProject;
@@ -25,7 +25,7 @@ public class TaskDTO {
                    @JsonProperty(required = true) String text,
                    @JsonProperty(required = true) Condition condition,
                    @JsonProperty(required = true) Date dateStart,
-                   @JsonProperty(required = true) Long idProject,
+                   @JsonProperty Long idProject,
                    @JsonProperty Long idWorker
     ) {
         this.name = name;

@@ -30,10 +30,10 @@ public class WorkerController {
     @GetMapping("add_worker")//Temporary
     public ResponseEntity<ResultDTO> addWorker(//OAuth2AuthenticationToken token,
                                                //@RequestBody WorkerDTO workerDTO,
-                                               @RequestParam String emailToken,//it's working
+                                               @RequestParam String emailToken,
                                                @RequestParam(required = false) String name,
                                                @RequestParam String qualification,
-                                               @RequestParam String email) {
+                                               @RequestParam(required = false) String email) {
         //String emailToken = getEmail(token);
         WorkerDTO workerDTO = new WorkerDTO(email, name, qualification);
         workerService.addWorker(workerDTO, emailToken);
@@ -42,7 +42,7 @@ public class WorkerController {
 
     @GetMapping("workers")//Temporary
     public List<WorkerDTO> getWorkers(//OAuth2AuthenticationToken token,
-                                      @RequestParam String emailToken,//it's working
+                                      @RequestParam String emailToken,
                                       @RequestParam(required = false, defaultValue = "0") Integer page) {
         //String emailToken = getEmail(token);
         return workerService.getWorkers(emailToken,
@@ -53,20 +53,20 @@ public class WorkerController {
                         "id"));
     }
 
-    @GetMapping("delete_workers")//it's working
+    @GetMapping("delete_workers")
     public ResponseEntity<ResultDTO> deleteWorkers(
             @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
         workerService.deleteWorker(List.of(idList));
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("get_worker")//it's working
+    @GetMapping("get_worker")
     public WorkerDTO getWorker(
             @RequestParam(name = "idWorker", required = false) Long id) {
         return workerService.getWorker(id);
     }
 
-    @GetMapping("update_worker")//it's working
+    @GetMapping("update_worker")
     public ResponseEntity<ResultDTO> updateWorker(
             @RequestBody WorkerDTO workerDTO) {
         workerService.updateWorker(workerDTO);
@@ -91,9 +91,10 @@ public class WorkerController {
             @RequestParam(required = false) Long idTask) {
         return workerService.getTaskForWorker(idTask);
     }
+
     @GetMapping("count_worker") // Temporary
     public PageCountDTO countWorkers(//OAuth2AuthenticationToken token,
-                              @RequestParam String email){
+                                     @RequestParam String email) {
         //String email = getEmail(token);
         return new PageCountDTO(workerService.countByAccount_Email(email), PAGE_SIZE);
     }

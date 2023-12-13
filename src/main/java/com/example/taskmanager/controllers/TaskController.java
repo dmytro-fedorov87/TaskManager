@@ -52,23 +52,22 @@ public class TaskController {
     }
 
     @GetMapping("add_task")
-    public ResponseEntity<ResultDTO> addTask(
-            @RequestParam(name = "idProject", required = false) Long idProject,
-            @RequestBody TaskDTO taskDTO) {
-        taskService.addTask(taskDTO, idProject);
+    public ResponseEntity<ResultDTO> addTask(//it works instead dataformat in base null
+                                             @RequestBody TaskDTO taskDTO) {//TODO
+        taskService.addTask(taskDTO, taskDTO.getIdProject());
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
     @GetMapping("update_task")
     public ResponseEntity<ResultDTO> updateTask(
-                        @RequestBody TaskDTO taskDTO) {
+            @RequestBody TaskDTO taskDTO) {
 
         taskService.updateTask(taskDTO);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("delete_task")
-    public ResponseEntity<ResultDTO> deleteTask(
+    @GetMapping("delete_task")//TODO
+    public ResponseEntity<ResultDTO> deleteTask(// need to do change Project's condition after delete tasks
             @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
         taskService.deleteTask(List.of(idList));
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);

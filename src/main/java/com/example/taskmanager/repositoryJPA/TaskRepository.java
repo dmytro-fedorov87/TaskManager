@@ -12,8 +12,6 @@ import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> findTaskByConditionAndProject_Id(Long idProject, Condition condition);
-
     List<Task> findByWorker_Email(String email);
 
     Long countByConditionAndProject_Id(Condition taskCondition, Long idProject);
@@ -22,4 +20,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
             "FROM Worker w, Task t WHERE t.dateStart >= :from AND t.dateStart < :to")
     List<TaskToNotifyDTO> findTaskToNotify(@Param("to") Date to, @Param("from") Date from);
 
+    List<Task> findAllByConditionAndProject_Id(Condition taskCondition, Long idProject);
 }

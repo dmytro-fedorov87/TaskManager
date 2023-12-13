@@ -30,7 +30,7 @@ public class ProjectService implements ProjectServiceInterface {
     public void addProject(String name, String email) {
         if (projectRepository.existsByName(name))
             return;
-        Project project = new Project(name, Condition.IN_RPOGRES);
+        Project project = new Project(name, Condition.IN_PROGRESS);
 
         Account account = accountRepository.findByEmail(email);
         account.addProjectToAccount(project);
