@@ -45,4 +45,8 @@ public class Project {
         tasks.add(task);
         task.setProject(this);
     }
+    public void deleteTaskInProject(Task task) {
+        tasks.remove(task);
+
+    }
 }

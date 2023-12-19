@@ -68,8 +68,9 @@ public class TaskController {
 
     @GetMapping("delete_task")//TODO
     public ResponseEntity<ResultDTO> deleteTask(// need to do change Project's condition after delete tasks
-            @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
-        taskService.deleteTask(List.of(idList));
+            @RequestParam(name = "idTask", required = false) Long idTask,
+            @RequestParam(name = "idProject", required = false) Long idProject) {
+        taskService.deleteTask(idTask, idProject);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 public interface TaskServiceInterface {
     void addTask(TaskDTO taskDTO, Long idProject);
 
-    void deleteTask(List<Long> idList);
+    void deleteTask(Long id, Long idProject);
 
 
     void updateTask(TaskDTO taskDTO);

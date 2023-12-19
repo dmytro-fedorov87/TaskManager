@@ -13,7 +13,7 @@ public class TaskDTO {
     private String text;
 
     private Condition condition;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateStart;
 
     private Long idProject;
