@@ -36,7 +36,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, Condition condition, String text, Date dataStart) {
+    private Task(String name, Condition condition, String text, Date dateStart) {
         this.name = name;
         this.condition = condition;
         this.text = text;
@@ -47,12 +47,12 @@ public class Task {
         return new TaskForWorkerDTO(id, name, text, condition, project.getName());
     }
 
-    public static Task of(String name, String text, Date dateStart, Condition condition) {
+    public static Task of(String name, Condition condition, String text, Date dateStart) {
         return new Task(name, condition, text, dateStart);
     }
 
     public static Task fromTaskDTO(TaskDTO taskDTO) {
-        return Task.of(taskDTO.getName(), taskDTO.getText(), taskDTO.getDateStart(), taskDTO.getCondition());
+        return Task.of(taskDTO.getName(), taskDTO.getCondition(), taskDTO.getText(), taskDTO.getDateStart());
     }
 
     public TaskDTO toTaskDTO() {

@@ -15,7 +15,7 @@ public class AppConfiguration {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
-    @Bean(name = "simpleMessage")
+    @Bean //(name = "simpleMessage")
     @Scope("prototype")
     public SimpleMailMessage massageTemplate() {
         SimpleMailMessage simpleMessage = new SimpleMailMessage();
