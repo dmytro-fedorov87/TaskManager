@@ -73,7 +73,7 @@ public class WorkerController {
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("all_tasks_worker")//it's working, need to check with tasks
+    @GetMapping("all_tasks_worker")
     public List<TaskForWorkerDTO> getTasksForWorker(
             @RequestParam(name = "idWorker", required = false) Long idWorker,
             @RequestParam(required = false, defaultValue = "0") Integer page) {
@@ -86,7 +86,7 @@ public class WorkerController {
                         "id"));
     }
 
-    @GetMapping("task_worker")//need to check
+    @GetMapping("task_worker")
     public TaskForWorkerDTO getTaskWorker(
             @RequestParam(required = false) Long idTask) {
         return workerService.getTaskForWorker(idTask);
