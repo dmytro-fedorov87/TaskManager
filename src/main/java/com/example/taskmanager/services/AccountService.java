@@ -24,10 +24,4 @@ public class AccountService implements AccountServiceInterface {
         accountRepository.save(account);
     }
 
-    @Transactional//Temporary
-    @Override
-    public Account getAcc(String email) {
-        return accountRepository.findByEmail(email);
-    }
-
 }

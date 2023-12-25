@@ -138,7 +138,7 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.findTaskToNotify(from, to);
     }
 
-    private void changeProjectConditional(Project project) {// check how it work
+    private void changeProjectConditional(Project project) {
         List<Task> taskList = project.getTasks();
         if (taskList.stream().allMatch(a -> a.getCondition().equals(Condition.DONE))) {// if all Tasks  are "Done" returns True
             project.setCondition(Condition.DONE);

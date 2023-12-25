@@ -2,7 +2,6 @@ package com.example.taskmanager.services;
 
 import com.example.taskmanager.dto.ProjectDTO;
 import com.example.taskmanager.model.Condition;
-import com.example.taskmanager.model.Project;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;

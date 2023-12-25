@@ -51,14 +51,14 @@ public class TaskController {
         return new PageCountDTO(taskService.countTask(taskCondition, id), PAGE_SIZE);
     }
 
-    @GetMapping("add_task")
+    @PostMapping("add_task")
     public ResponseEntity<ResultDTO> addTask(//it works instead dataformat in base null
                                              @RequestBody TaskDTO taskDTO) {//TODO
         taskService.addTask(taskDTO, taskDTO.getIdProject());
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("update_task")
+    @PostMapping("update_task")
     public ResponseEntity<ResultDTO> updateTask(
             @RequestBody TaskDTO taskDTO) {
 
@@ -66,7 +66,7 @@ public class TaskController {
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("delete_task")//TODO
+    @GetMapping("delete_task")
     public ResponseEntity<ResultDTO> deleteTask(
             @RequestParam(name = "idTask", required = false) Long idTask,
             @RequestParam(name = "idProject", required = false) Long idProject) {

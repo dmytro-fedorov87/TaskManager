@@ -30,20 +30,18 @@ public class ProjectController {
     }
 
     @GetMapping("projects") // We have two columns with Conditions(in Progress and Done)
-    public List<ProjectDTO> getProjectsByConditions(//OAuth2AuthenticationToken token,
-                                                    @RequestParam String email,
-                                                    @RequestParam(required = false) Condition con,//Temporary
+    public List<ProjectDTO> getProjectsByConditions(OAuth2AuthenticationToken token,
+                                                    @RequestParam(required = false) Condition con,
                                                     @RequestParam(required = false, defaultValue = "0") Integer page) {
-        //String email = getEmail(token);
+        String email = getEmail(token);
         return projectService.getProjects(email, con,
                 PageRequest.of(page, PAGE_SIZE));
     }
 
-    @GetMapping("count_project") //Temporary
-    public PageCountDTO countProjects(//OAuth2AuthenticationToken token,
-                                      @RequestParam String email,
+    @GetMapping("count_project")
+    public PageCountDTO countProjects(OAuth2AuthenticationToken token,
                                       @RequestParam(required = false) Condition con) {
-        //String email = getEmail(token);
+        String email = getEmail(token);
         return PageCountDTO.of(projectService.countProjects(email, con), PAGE_SIZE);
     }
 
@@ -53,24 +51,23 @@ public class ProjectController {
     }
 
     //it's work
-    @GetMapping("add_project")//Temporary
-    public ResponseEntity<ResultDTO> addProject(//OAuth2AuthenticationToken token,
-                                                @RequestParam String email,
+    @PostMapping("add_project")
+    public ResponseEntity<ResultDTO> addProject(OAuth2AuthenticationToken token,
                                                 @RequestParam(required = false) String name) {
-        //String email = getEmail(token);
+        String email = getEmail(token);
         projectService.addProject(name, email);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
 
-    @GetMapping("delete_project")
+    @PostMapping("delete_project")
     public ResponseEntity<ResultDTO> deleteProjects(
             @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
         projectService.deleteProject(List.of(idList));
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("update_project")
+    @PostMapping("update_project")
     public ResponseEntity<ResultDTO> updateProjectName(@RequestParam(name = "idProject", required = false) Long id,
                                                        @RequestParam(required = false) String newName) {
         projectService.updateProjectName(id, newName);

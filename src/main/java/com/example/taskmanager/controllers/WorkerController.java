@@ -27,24 +27,21 @@ public class WorkerController {
     }
 
 
-    @GetMapping("add_worker")//Temporary
-    public ResponseEntity<ResultDTO> addWorker(//OAuth2AuthenticationToken token,
-                                               //@RequestBody WorkerDTO workerDTO,
-                                               @RequestParam String emailToken,
+    @PostMapping("add_worker")
+    public ResponseEntity<ResultDTO> addWorker(OAuth2AuthenticationToken token,
                                                @RequestParam(required = false) String name,
                                                @RequestParam String qualification,
                                                @RequestParam(required = false) String email) {
-        //String emailToken = getEmail(token);
+        String emailToken = getEmail(token);
         WorkerDTO workerDTO = new WorkerDTO(email, name, qualification);
         workerService.addWorker(workerDTO, emailToken);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    @GetMapping("workers")//Temporary
-    public List<WorkerDTO> getWorkers(//OAuth2AuthenticationToken token,
-                                      @RequestParam String emailToken,
+    @GetMapping("workers")
+    public List<WorkerDTO> getWorkers(OAuth2AuthenticationToken token,
                                       @RequestParam(required = false, defaultValue = "0") Integer page) {
-        //String emailToken = getEmail(token);
+        String emailToken = getEmail(token);
         return workerService.getWorkers(emailToken,
                 PageRequest.of(
                         page,
@@ -53,7 +50,7 @@ public class WorkerController {
                         "id"));
     }
 
-    @GetMapping("delete_workers")
+    @PostMapping("delete_workers")
     public ResponseEntity<ResultDTO> deleteWorkers(
             @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
         workerService.deleteWorker(List.of(idList));
@@ -66,7 +63,7 @@ public class WorkerController {
         return workerService.getWorker(id);
     }
 
-    @GetMapping("update_worker")
+    @PostMapping("update_worker")
     public ResponseEntity<ResultDTO> updateWorker(
             @RequestBody WorkerDTO workerDTO) {
         workerService.updateWorker(workerDTO);
