@@ -53,7 +53,7 @@ public class TaskController {
 
     @PostMapping("add_task")
     public ResponseEntity<ResultDTO> addTask(//it works instead dataformat in base null
-                                             @RequestBody TaskDTO taskDTO) {//TODO
+                                             @RequestBody TaskDTO taskDTO) {
         taskService.addTask(taskDTO, taskDTO.getIdProject());
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
