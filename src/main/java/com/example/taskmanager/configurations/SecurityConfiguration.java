@@ -20,7 +20,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout")
+                .antMatchers("/login.html", "/js/**", "/css/**", "/favicon.ico", "/logout", "/h2-console/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -32,14 +32,8 @@ public class SecurityConfiguration {
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
-                .and()
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
-                .and()
-                .headers().frameOptions().disable()
-                .and()
-                .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
-                .cors().disable();
+                .and().csrf().ignoringRequestMatchers(toH2Console());
+        http.headers().frameOptions().disable();
 
         return http.build();
     }
