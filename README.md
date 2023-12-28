@@ -1,8 +1,7 @@
-The program is TaskManager. 
+ The program is TaskManager. 
 This program was created for projects managment. Users be able to register, make projects, add   workers, create tasks for workers, and send tasks to worker by email. 
 Program has a search with which the user can find his tasks, projects or workers.
 Registration use Google account.  After registration, the user can use the program.
-
 Users be able to:
   - add projects (User needs to write the project name).
   - delete projects (User can select one or more project and delete them).
