@@ -21,6 +21,6 @@ public interface WorkerServiceInterface {
 
     TaskForWorkerDTO getTaskForWorker(Long idTask);
 
-    Long countByAccount_Email(String email);
+    Long countByAccountEmail(String email);
 
 }

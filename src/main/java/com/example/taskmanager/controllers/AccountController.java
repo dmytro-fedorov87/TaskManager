@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+// Controller for work with accounts
 @RestController
 public class AccountController {
     AccountService accountService;
@@ -16,9 +17,9 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-
+    //Take from token, not from DB, and send on front-end.
     @GetMapping("account")
-    public AccountDTO account(OAuth2AuthenticationToken token) { //take from token, not from DB.
+    public AccountDTO account(OAuth2AuthenticationToken token) {
         Map<String, Object> ourAttributes = token.getPrincipal().getAttributes();
         String name = (String) ourAttributes.get("name");
         String email = (String) ourAttributes.get("email");

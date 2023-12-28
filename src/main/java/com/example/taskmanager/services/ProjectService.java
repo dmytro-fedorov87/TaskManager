@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Class for recording and getting information about projects in/from DB.
 @Service
 public class ProjectService implements ProjectServiceInterface {
     private final ProjectRepository projectRepository;
@@ -50,7 +51,7 @@ public class ProjectService implements ProjectServiceInterface {
     public void updateProjectName(Long id, String newName) {
         if (projectRepository.existsByName(newName))
             return;
-        Project project = getProjectFromOptional(id); //my method
+        Project project = getProjectFromOptional(id); //My method.
         project.setName(newName);
         projectRepository.save(project);
 
@@ -64,7 +65,7 @@ public class ProjectService implements ProjectServiceInterface {
         return projectList.stream().
                 filter(a -> a.getCondition().equals(condition)).
                 map((a) -> a.toProjectDTO()).
-                sorted(Comparator.comparing(ProjectDTO::getId).reversed()).//New project contain in top of list on frontend
+                sorted(Comparator.comparing(ProjectDTO::getId).reversed()).//New project contain in top of list on front-end.
                         collect(Collectors.toList());
 
     }

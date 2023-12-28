@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.List;
 
+// Class for checking witch tasks need to receive to workers for perform.
 @Component
 public class SchedulingEnableEmail {
     private final EmailService emailService;

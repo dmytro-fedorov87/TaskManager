@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+// Class-Controller for work with workers.
 @RestController
 public class WorkerController {
     private static final int PAGE_SIZE = 5;
@@ -82,18 +82,17 @@ public class WorkerController {
                         Sort.Direction.DESC,
                         "id"));
     }
-
+// TaskForWorker has different information with Task.
     @GetMapping("task_worker")
     public TaskForWorkerDTO getTaskWorker(
             @RequestParam(required = false) Long idTask) {
         return workerService.getTaskForWorker(idTask);
     }
 
-    @GetMapping("count_worker") // Temporary
-    public PageCountDTO countWorkers(//OAuth2AuthenticationToken token,
-                                     @RequestParam String email) {
-        //String email = getEmail(token);
-        return new PageCountDTO(workerService.countByAccount_Email(email), PAGE_SIZE);
+    @GetMapping("count_worker")
+    public PageCountDTO countWorkers(OAuth2AuthenticationToken token) {
+        String email = getEmail(token);
+        return new PageCountDTO(workerService.countByAccountEmail(email), PAGE_SIZE);
     }
 
     private String getEmail(OAuth2AuthenticationToken token) {

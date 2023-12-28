@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
+//Class-Controller for work with Projects
 @RestController
 public class ProjectController {
     private static final int PAGE_SIZE = 5;
@@ -29,15 +29,17 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("projects") // We have two columns with Conditions(in Progress and Done)
+    // Project has two columns with Conditions("in Progress" and "Done").
+    @GetMapping("projects")
     public List<ProjectDTO> getProjectsByConditions(OAuth2AuthenticationToken token,
                                                     @RequestParam(required = false) Condition con,
                                                     @RequestParam(required = false, defaultValue = "0") Integer page) {
-        String email = getEmail(token);
+        String email = getEmail(token); ///My method.
         return projectService.getProjects(email, con,
                 PageRequest.of(page, PAGE_SIZE));
     }
 
+    // Method needs for counting the number of pages.
     @GetMapping("count_project")
     public PageCountDTO countProjects(OAuth2AuthenticationToken token,
                                       @RequestParam(required = false) Condition con) {
@@ -50,7 +52,6 @@ public class ProjectController {
         return projectService.getProject(id);
     }
 
-    //it's work
     @PostMapping("add_project")
     public ResponseEntity<ResultDTO> addProject(OAuth2AuthenticationToken token,
                                                 @RequestParam(required = false) String name) {
@@ -58,7 +59,6 @@ public class ProjectController {
         projectService.addProject(name, email);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
-
 
     @PostMapping("delete_project")
     public ResponseEntity<ResultDTO> deleteProjects(
@@ -79,6 +79,7 @@ public class ProjectController {
         return new ResponseEntity<>(new BadResultDTO(), HttpStatus.BAD_REQUEST);
     }
 
+    //Method for receiving emails from token.
     private String getEmail(OAuth2AuthenticationToken token) {
         return (String) token.getPrincipal().getAttributes().get("email");
     }

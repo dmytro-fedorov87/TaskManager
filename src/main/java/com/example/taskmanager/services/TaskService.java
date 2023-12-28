@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+// Class for recording and getting information about tasks in/from DB.
 @Service
 public class TaskService implements TaskServiceInterface {
     private final TaskRepository taskRepository;
@@ -49,15 +50,14 @@ public class TaskService implements TaskServiceInterface {
         project.addTaskToProject(task);
         projectRepository.save(project);
 
-        changeProjectConditional(project);//my method. When all project's tasks have Condition "Done" project also become with Condition "Done"
-          // if not project's condition become "in progress"
+        changeProjectConditional(project);
     }
 
     @Transactional
     @Override
     public void deleteTask(Long id, Long idProject) {
         Project project = projectService.getProjectFromOptional(idProject);
-        var taskOpt = taskRepository.findById(id); 
+        var taskOpt = taskRepository.findById(id);
         if (taskOpt.isEmpty())
             return;
         Task task = taskOpt.get();
@@ -90,7 +90,7 @@ public class TaskService implements TaskServiceInterface {
         project.addTaskToProject(task);
         projectRepository.save(project);
 
-        changeProjectConditional(project);//my method. When all project's tasks have Condition "Done" project also become with Condition "Done"
+        changeProjectConditional(project);
 
     }
 
@@ -138,6 +138,7 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.findTaskToNotify(from, to);
     }
 
+    //When all project's tasks have Condition "Done" project also become with Condition "Done", if not condition become "in Progress".
     private void changeProjectConditional(Project project) {
         List<Task> taskList = project.getTasks();
         if (taskList.stream().allMatch(a -> a.getCondition().equals(Condition.DONE))) {// if all Tasks  are "Done" returns True

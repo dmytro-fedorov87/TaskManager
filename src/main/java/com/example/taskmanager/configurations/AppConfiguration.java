@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+// Class-configuration for create Template of Massage
 @Configuration
 @EnableScheduling
 @PropertySource("classpath:application.properties")

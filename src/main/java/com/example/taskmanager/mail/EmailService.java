@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
+//Class for sending messages.
 @Component
 public class EmailService implements EmailServiceInterface {
     private final JavaMailSender mailSender;
@@ -18,9 +19,9 @@ public class EmailService implements EmailServiceInterface {
     }
 
     @Override
-    public void sendMessage(TaskToNotifyDTO task) { //TODO
+    public void sendMessage(TaskToNotifyDTO task) {
         SimpleMailMessage mailMessage = context.getBean(SimpleMailMessage.class);
-        String text = String.format(mailMessage.getText(), task.getData(), task.getName() + ": " + task.getText());// check how it works
+        String text = String.format(mailMessage.getText(), task.getData(), task.getName() + ": " + task.getText());
         mailMessage.setText(text);
         mailMessage.setTo(task.getEmail());
         mailSender.send(mailMessage);

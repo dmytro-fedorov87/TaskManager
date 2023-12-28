@@ -14,7 +14,7 @@ import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Class for recording and getting information about workers in/from DB.
 @Service
 public class WorkerService implements WorkerServiceInterface {
     private final WorkerRepository workerRepository;
@@ -58,7 +58,7 @@ public class WorkerService implements WorkerServiceInterface {
     @Transactional
     @Override
     public void updateWorker(WorkerDTO workerDTO) {
-        Worker w = getWorkerFromOptional(workerDTO.getId());// my method
+        Worker w = getWorkerFromOptional(workerDTO.getId());//My method.
         w.setName(workerDTO.getName());
         w.setEmail(workerDTO.getEmail());
         w.setQualification(workerDTO.getQualification());
@@ -92,7 +92,7 @@ public class WorkerService implements WorkerServiceInterface {
 
     @Transactional(readOnly = true)
     @Override
-    public Long countByAccount_Email(String email) {
+    public Long countByAccountEmail(String email) {
         return workerRepository.countByAccount_Email(email);
     }
 
