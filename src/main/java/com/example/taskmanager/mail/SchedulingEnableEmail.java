@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Class for checking witch tasks need to receive to workers for perform.
+ * Class for checking and sending messages after 1 minute.
  */
 @Component
 public class SchedulingEnableEmail {
