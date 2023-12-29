@@ -9,7 +9,7 @@ Users be able to:
   - add tasks in projects (User needs to fill in fields: task name, text, date(when task will start), employee (who needs to complete this task).
   - delete tasks (User can select one rask and delete it).
   - update tasks (User can update all task fields).
-  - add workers (User needs to fill in fields: name, email, qualification ).
+  - add workers (User needs to fill in fields: name, email, qualification).
   - delete workers (User can select one or more workers and delete them).
   - update workers (User can update all fields).
   - get worker’s tasks (User can see all tasks witch belong worker).
