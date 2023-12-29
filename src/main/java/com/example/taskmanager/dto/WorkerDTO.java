@@ -9,6 +9,9 @@ public class WorkerDTO {
     private String name;
     private String qualification;
 
+    /**
+     * RequestBody has these parameters.
+     */
     @JsonCreator
     public WorkerDTO(@JsonProperty(required = true) Long id,
                      @JsonProperty String email,

@@ -3,6 +3,9 @@ package com.example.taskmanager.dto;
 
 import java.util.Date;
 
+/**
+ * Program sends task in this form by email.
+ */
 public class TaskToNotifyDTO {
     private String name;
     private String email;

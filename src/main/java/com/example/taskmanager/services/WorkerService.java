@@ -14,7 +14,9 @@ import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-// Class for recording and getting information about workers in/from DB.
+/**
+ * Class for recording and getting information about workers in/from DB.
+ */
 @Service
 public class WorkerService implements WorkerServiceInterface {
     private final WorkerRepository workerRepository;

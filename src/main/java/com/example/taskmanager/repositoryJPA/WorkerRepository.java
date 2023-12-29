@@ -15,6 +15,9 @@ public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
     Long countByAccount_Email(String email);
 
+    /**
+     * Method create TaskForWorkerDTO use information from Task.
+     */
     @Query("SELECT new com.example.taskmanager.dto.TaskForWorkerDTO(t.id, t.name, t.text, t.condition, t.project.name)" +
             "FROM Worker w, Task t WHERE t.id = :id")
     TaskForWorkerDTO findTaskByIdTask(@Param("id") Long id);

@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-// Class for registration using Google account
+/**
+ * Class for registration using Google account
+ */
 @Component
 public class AuthHandler implements AuthenticationSuccessHandler {
     private final AccountService accountService;
@@ -22,7 +24,9 @@ public class AuthHandler implements AuthenticationSuccessHandler {
         this.accountService = accountService;
     }
 
-    // Take attributes from Google account and put in our Entity Account, save it
+    /**
+     * Take attributes from Google account and put in our Entity Account, save it
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException {

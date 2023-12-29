@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// Class for  work with Tasks.
+/**
+ * Class for work with Tasks.
+ */
 @RestController
 public class TaskController {
     private static final int PAGE_SIZE = 5;
@@ -26,7 +28,9 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    //Tasks are separated on three columns: "to Work", "in Progress", "Done".
+    /**
+     * Tasks are separated on three columns: "to Work", "in Progress", "Done".
+     */
     @GetMapping("project_tasks")
     public List<TaskDTO> getProjectTasks(@RequestParam(name = "idProject", required = false) Long id,
                                          @RequestParam(required = false) Condition taskCondition,
@@ -53,29 +57,28 @@ public class TaskController {
     }
 
     @PostMapping("add_task")
-    public ResponseEntity<ResultDTO> addTask(
-            @RequestBody TaskDTO taskDTO) {
+    public ResponseEntity<ResultDTO> addTask(@RequestBody TaskDTO taskDTO) {
         taskService.addTask(taskDTO, taskDTO.getIdProject());
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
     @PostMapping("update_task")
-    public ResponseEntity<ResultDTO> updateTask(
-            @RequestBody TaskDTO taskDTO) {
+    public ResponseEntity<ResultDTO> updateTask(@RequestBody TaskDTO taskDTO) {
 
         taskService.updateTask(taskDTO);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
     @GetMapping("delete_task")
-    public ResponseEntity<ResultDTO> deleteTask(
-            @RequestParam(name = "idTask", required = false) Long idTask,
-            @RequestParam(name = "idProject", required = false) Long idProject) {
+    public ResponseEntity<ResultDTO> deleteTask(@RequestParam(name = "idTask", required = false) Long idTask,
+                                                @RequestParam(name = "idProject", required = false) Long idProject) {
         taskService.deleteTask(idTask, idProject);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
-    // Method throw exception if endpoint receive not correct Json or receive nothing.
+    /**
+     * Method throw exception if endpoint receive not correct Json or receive nothing.
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ResultDTO> handleException() {
         return new ResponseEntity<>(new BadResultDTO(), HttpStatus.BAD_REQUEST);

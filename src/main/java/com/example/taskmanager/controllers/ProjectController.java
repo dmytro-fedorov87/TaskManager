@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-//Class-Controller for work with Projects
+/**
+ * Class-Controller for work with Projects
+ */
 @RestController
 public class ProjectController {
     private static final int PAGE_SIZE = 5;
@@ -29,7 +31,9 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    // Project has two columns with Conditions("in Progress" and "Done").
+    /**
+     * Project has two columns with Conditions("in Progress" and "Done").
+     */
     @GetMapping("projects")
     public List<ProjectDTO> getProjectsByConditions(OAuth2AuthenticationToken token,
                                                     @RequestParam(required = false) Condition con,
@@ -39,7 +43,9 @@ public class ProjectController {
                 PageRequest.of(page, PAGE_SIZE));
     }
 
-    // Method needs for counting the number of pages.
+    /**
+     * Method needs for counting the number of pages.
+     */
     @GetMapping("count_project")
     public PageCountDTO countProjects(OAuth2AuthenticationToken token,
                                       @RequestParam(required = false) Condition con) {
@@ -61,8 +67,7 @@ public class ProjectController {
     }
 
     @PostMapping("delete_project")
-    public ResponseEntity<ResultDTO> deleteProjects(
-            @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
+    public ResponseEntity<ResultDTO> deleteProjects(@RequestParam(name = "toDelete[]", required = false) Long[] idList) {
         projectService.deleteProject(List.of(idList));
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
@@ -79,7 +84,9 @@ public class ProjectController {
         return new ResponseEntity<>(new BadResultDTO(), HttpStatus.BAD_REQUEST);
     }
 
-    //Method for receiving emails from token.
+    /**
+     * Method for receiving emails from token.
+     */
     private String getEmail(OAuth2AuthenticationToken token) {
         return (String) token.getPrincipal().getAttributes().get("email");
     }

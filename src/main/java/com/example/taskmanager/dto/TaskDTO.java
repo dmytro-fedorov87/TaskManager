@@ -20,6 +20,9 @@ public class TaskDTO {
 
     private Long idWorker;
 
+    /**
+     * RequestBody has these parameters.
+     */
     @JsonCreator
     public TaskDTO(@JsonProperty String name,
                    @JsonProperty(required = true) String text,

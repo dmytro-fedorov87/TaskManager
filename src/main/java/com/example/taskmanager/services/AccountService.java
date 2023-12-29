@@ -6,7 +6,9 @@ import com.example.taskmanager.repositoryJPA.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//Class for save accounts in DB.
+/**
+ * Class for save accounts in DB.
+ */
 @Service
 public class AccountService implements AccountServiceInterface {
 

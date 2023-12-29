@@ -14,7 +14,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// Class for recording and getting information about projects in/from DB.
+/**
+ * Class for recording and getting information about projects in/from DB.
+ */
 @Service
 public class ProjectService implements ProjectServiceInterface {
     private final ProjectRepository projectRepository;

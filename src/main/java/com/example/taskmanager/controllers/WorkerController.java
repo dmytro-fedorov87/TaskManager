@@ -16,7 +16,10 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-// Class-Controller for work with workers.
+
+/**
+ * Class-Controller for work with workers.
+ */
 @RestController
 public class WorkerController {
     private static final int PAGE_SIZE = 5;
@@ -51,29 +54,25 @@ public class WorkerController {
     }
 
     @PostMapping("delete_workers")
-    public ResponseEntity<ResultDTO> deleteWorkers(
-            @RequestParam(name = "toDelete[]", required = false) Long[] idList) {
+    public ResponseEntity<ResultDTO> deleteWorkers(@RequestParam(name = "toDelete[]", required = false) Long[] idList) {
         workerService.deleteWorker(List.of(idList));
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
     @GetMapping("get_worker")
-    public WorkerDTO getWorker(
-            @RequestParam(name = "idWorker", required = false) Long id) {
+    public WorkerDTO getWorker(@RequestParam(name = "idWorker", required = false) Long id) {
         return workerService.getWorker(id);
     }
 
     @PostMapping("update_worker")
-    public ResponseEntity<ResultDTO> updateWorker(
-            @RequestBody WorkerDTO workerDTO) {
+    public ResponseEntity<ResultDTO> updateWorker(@RequestBody WorkerDTO workerDTO) {
         workerService.updateWorker(workerDTO);
         return new ResponseEntity<>(new SuccessResultDTO(), HttpStatus.OK);
     }
 
     @GetMapping("all_tasks_worker")
-    public List<TaskForWorkerDTO> getTasksForWorker(
-            @RequestParam(name = "idWorker", required = false) Long idWorker,
-            @RequestParam(required = false, defaultValue = "0") Integer page) {
+    public List<TaskForWorkerDTO> getTasksForWorker(@RequestParam(name = "idWorker", required = false) Long idWorker,
+                                                    @RequestParam(required = false, defaultValue = "0") Integer page) {
         String emailWorker = workerService.getWorker(idWorker).getEmail();
         return workerService.getTaskListForWorker(emailWorker,
                 PageRequest.of(
@@ -82,7 +81,10 @@ public class WorkerController {
                         Sort.Direction.DESC,
                         "id"));
     }
-// TaskForWorker has different information with Task.
+
+    /**
+     * TaskForWorker has different information with Task.
+     */
     @GetMapping("task_worker")
     public TaskForWorkerDTO getTaskWorker(
             @RequestParam(required = false) Long idTask) {

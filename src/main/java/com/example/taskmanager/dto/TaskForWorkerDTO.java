@@ -2,6 +2,9 @@ package com.example.taskmanager.dto;
 
 import com.example.taskmanager.model.Condition;
 
+/**
+ * Worker's task.
+ */
 public class TaskForWorkerDTO {
     private Long id;
     private String name;

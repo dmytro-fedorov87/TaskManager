@@ -16,6 +16,9 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     Long countByConditionAndProject_Id(Condition taskCondition, Long idProject);
 
+    /**
+     * Method create TaskToNotifyDTO use information about date and time from Task.
+     */
     @Query("SELECT NEW com.example.taskmanager.dto.TaskToNotifyDTO(t.name, w.email, t.text, t.dateStart)" +
             "FROM Worker w, Task t WHERE t.dateStart >= :from AND t.dateStart < :to")
     List<TaskToNotifyDTO> findTaskToNotify(@Param("to") Date to, @Param("from") Date from);

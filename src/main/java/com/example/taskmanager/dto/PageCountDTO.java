@@ -1,6 +1,8 @@
 package com.example.taskmanager.dto;
 
-// Class needs for PageRequest().
+/**
+ * Class needs for PageRequest().
+ */
 public class PageCountDTO {
     private final long count;
     private final int pageSize;

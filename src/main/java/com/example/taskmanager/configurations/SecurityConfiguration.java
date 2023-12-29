@@ -8,7 +8,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
-// Security class. We permit and forbid access.
+/**
+ * Security class. We permit and forbid access.
+ */
 @Configuration
 public class SecurityConfiguration {
     private final AuthenticationSuccessHandler authenticationSuccessHandler;
