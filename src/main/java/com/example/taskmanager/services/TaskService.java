@@ -128,16 +128,34 @@ public class TaskService implements TaskServiceInterface {
     @Override
     public List<TaskToNotifyDTO> getTasksToNotify(Date now) {
         Calendar calendar = Calendar.getInstance();
-
         calendar.setTime(now);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         Date from = calendar.getTime();
-
         calendar.add(Calendar.MINUTE, 1);
         Date to = calendar.getTime();
 
-        return taskRepository.findTaskToNotify(from, to);
+        List<TaskToNotifyDTO> taskToNotifyDTOList = taskRepository.findTaskToNotify(from, to);
+        changeTaskConditional(taskToNotifyDTOList);
+        return taskToNotifyDTOList;
+    }
+
+    /**
+     * Method change task condition before it will send by email.
+     */
+    private void changeTaskConditional(List<TaskToNotifyDTO> taskToNotifyDTOList) {
+        List<Long> listTaskId = taskToNotifyDTOList.
+                stream().
+                map(TaskToNotifyDTO::getId).
+                toList();
+        listTaskId.forEach(a -> {
+            var taskOpt = taskRepository.findById(a);
+            if (taskOpt.isPresent()) {
+                Task task = taskOpt.get();
+                task.setCondition(Condition.IN_PROGRESS);
+                taskRepository.save(task);
+            }
+        });
     }
 
     /**
