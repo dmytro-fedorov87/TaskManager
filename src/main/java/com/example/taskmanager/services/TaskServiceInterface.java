@@ -5,6 +5,7 @@ import com.example.taskmanager.dto.TaskToNotifyDTO;
 import com.example.taskmanager.model.Condition;
 import org.springframework.data.domain.PageRequest;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface TaskServiceInterface {
 
     TaskDTO getTask(Long id);
 
-    List<TaskToNotifyDTO> getTasksToNotify(Date now);
+    List<TaskToNotifyDTO> getTasksToNotify(LocalDateTime now);
 
     List<TaskDTO> getProjectTasks(Long idProject, Condition taskCondition, PageRequest pageable);
 

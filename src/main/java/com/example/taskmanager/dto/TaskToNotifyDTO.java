@@ -1,7 +1,7 @@
 package com.example.taskmanager.dto;
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Program sends task in this form by email.
@@ -11,9 +11,9 @@ public class TaskToNotifyDTO {
     private String name;
     private String email;
     private String text;
-    private Date data;
+    private LocalDateTime data;
 
-    public TaskToNotifyDTO(Long id, String name, String email, String text, Date data) {
+    public TaskToNotifyDTO(Long id, String name, String email, String text, LocalDateTime data) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -35,7 +35,7 @@ public class TaskToNotifyDTO {
         return text;
     }
 
-    public Date getData() {
+    public LocalDateTime getData() {
         return data;
     }
 }

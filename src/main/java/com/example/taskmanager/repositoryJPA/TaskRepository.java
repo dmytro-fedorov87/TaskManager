@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
@@ -21,7 +21,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
      */
     @Query("SELECT NEW com.example.taskmanager.dto.TaskToNotifyDTO(t.id, t.name, w.email, t.text, t.dateStart)" +
             "FROM Worker w, Task t WHERE t.dateStart >= :from AND t.dateStart < :to")
-    List<TaskToNotifyDTO> findTaskToNotify(@Param("to") Date to, @Param("from") Date from);
+    List<TaskToNotifyDTO> findTaskToNotify(@Param("to") LocalDateTime to, @Param("from") LocalDateTime from);
 
     List<Task> findAllByConditionAndProject_Id(Condition taskCondition, Long idProject);
 }
