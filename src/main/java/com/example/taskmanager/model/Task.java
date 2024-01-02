@@ -8,7 +8,7 @@ import javax.persistence.*;
 import lombok.Data;
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -23,8 +23,7 @@ public class Task {
     private Condition condition;
     private String text;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateStart;
+    private LocalDateTime dateStart;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -36,7 +35,7 @@ public class Task {
     public Task() {
     }
 
-    private Task(String name, Condition condition, String text, Date dateStart) {
+    private Task(String name, Condition condition, String text, LocalDateTime dateStart) {
         this.name = name;
         this.condition = condition;
         this.text = text;
@@ -47,7 +46,7 @@ public class Task {
         return new TaskForWorkerDTO(id, name, text, condition, project.getName());
     }
 
-    public static Task of(String name, Condition condition, String text, Date dateStart) {
+    public static Task of(String name, Condition condition, String text, LocalDateTime dateStart) {
         return new Task(name, condition, text, dateStart);
     }
 

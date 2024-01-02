@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.taskmanager.model.Condition;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class TaskDTO {
     private Long id;
@@ -13,8 +13,8 @@ public class TaskDTO {
     private String text;
 
     private Condition condition;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone="Europe/Kiev")
-    private Date dateStart;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateStart;
 
     private Long idProject;
 
@@ -27,7 +27,7 @@ public class TaskDTO {
     public TaskDTO(@JsonProperty String name,
                    @JsonProperty(required = true) String text,
                    @JsonProperty(required = true) Condition condition,
-                   @JsonProperty(required = true) Date dateStart,
+                   @JsonProperty(required = true) LocalDateTime dateStart,
                    @JsonProperty Long idProject,
                    @JsonProperty Long idWorker
     ) {
@@ -39,7 +39,7 @@ public class TaskDTO {
         this.idWorker = idWorker;
     }
 
-    public TaskDTO(Long id, String name, String text, Condition condition, Date dateStart, Long idProject, Long idWorker) {
+    public TaskDTO(Long id, String name, String text, Condition condition, LocalDateTime dateStart, Long idProject, Long idWorker) {
         this.id = id;
         this.name = name;
         this.text = text;
@@ -84,11 +84,11 @@ public class TaskDTO {
         this.condition = condition;
     }
 
-    public Date getDateStart() {
+    public LocalDateTime getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(LocalDateTime dateStart) {
         this.dateStart = dateStart;
     }
 
