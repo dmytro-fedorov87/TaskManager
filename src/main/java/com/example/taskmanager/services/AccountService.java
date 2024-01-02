@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 public class AccountService implements AccountServiceInterface {
-
     private final AccountRepository accountRepository;
 
     public AccountService(AccountRepository accountRepository) {

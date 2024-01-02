@@ -15,8 +15,6 @@ import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,7 +67,6 @@ public class TaskService implements TaskServiceInterface {
         projectRepository.save(project);
         changeProjectConditional(project);
     }
-
 
     @Transactional
     @Override
@@ -133,7 +130,6 @@ public class TaskService implements TaskServiceInterface {
         LocalDateTime to = LocalDateTime.
                 of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth(),
                         localDateTime.getHour(), localDateTime.getMinute() + 1);
-
 
         List<TaskToNotifyDTO> taskToNotifyDTOList = taskRepository.findTaskToNotify(to, from);
         changeTaskConditional(taskToNotifyDTOList);

@@ -36,7 +36,6 @@ public class Project {
         this.condition = condition;
     }
 
-
     public ProjectDTO toProjectDTO() {
         return new ProjectDTO(id, name, condition);
     }

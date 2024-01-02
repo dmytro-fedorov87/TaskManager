@@ -26,7 +26,6 @@ public class ProjectController {
     private static final int PAGE_SIZE = 5;
     private final ProjectService projectService;
 
-
     public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
     }

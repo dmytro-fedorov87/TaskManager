@@ -6,14 +6,12 @@ import com.example.taskmanager.model.Condition;
 import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 public interface TaskServiceInterface {
     void addTask(TaskDTO taskDTO, Long idProject);
 
     void deleteTask(Long id, Long idProject);
-
 
     void updateTask(TaskDTO taskDTO);
 

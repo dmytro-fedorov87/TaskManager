@@ -22,7 +22,6 @@ public class ProjectService implements ProjectServiceInterface {
     private final ProjectRepository projectRepository;
     private final AccountRepository accountRepository;
 
-
     public ProjectService(ProjectRepository projectRepository, AccountRepository accountRepository) {
         this.projectRepository = projectRepository;
         this.accountRepository = accountRepository;
@@ -84,7 +83,6 @@ public class ProjectService implements ProjectServiceInterface {
     public Long countProjects(String email, Condition con) {
         return projectRepository.countByAccountEmailAndCondition(email, con);
     }
-
 
     protected Project getProjectFromOptional(Long id) {
         var projectOptional = projectRepository.findById(id);

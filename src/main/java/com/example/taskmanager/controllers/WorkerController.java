@@ -29,7 +29,6 @@ public class WorkerController {
         this.workerService = workerService;
     }
 
-
     @PostMapping("add_worker")
     public ResponseEntity<ResultDTO> addWorker(OAuth2AuthenticationToken token,
                                                @RequestParam(required = false) String name,
