@@ -121,7 +121,7 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.countByConditionAndProject_Id(taskCondition, idProject);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public List<TaskToNotifyDTO> getTasksToNotify(LocalDateTime localDateTime) {
         LocalDateTime from = LocalDateTime.
@@ -140,17 +140,21 @@ public class TaskService implements TaskServiceInterface {
      * Method change task condition before it will send by email.
      */
     private void changeTaskConditional(List<TaskToNotifyDTO> taskToNotifyDTOList) {
-        List<Long> listTaskId = taskToNotifyDTOList.
+        List<Task> listTask = taskToNotifyDTOList.
                 stream().
-                map(TaskToNotifyDTO::getId).
+                map(a -> {
+                    var taskOpt = taskRepository.findById(a.getId());
+                    Task task = new Task();
+                    if (taskOpt.isPresent()) {
+                        task = taskOpt.get();
+                    }
+                    return task;
+                }).
                 toList();
-        listTaskId.forEach(a -> {
-            var taskOpt = taskRepository.findById(a);
-            if (taskOpt.isPresent()) {
-                Task task = taskOpt.get();
-                task.setCondition(Condition.IN_PROGRESS);
-                taskRepository.save(task);
-            }
+
+        listTask.forEach(a -> {
+            a.setCondition(Condition.IN_PROGRESS);
+            taskRepository.save(a);
         });
     }
 
