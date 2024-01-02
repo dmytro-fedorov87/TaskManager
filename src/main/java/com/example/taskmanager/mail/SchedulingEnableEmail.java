@@ -5,6 +5,7 @@ import com.example.taskmanager.services.TaskService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class SchedulingEnableEmail {
 
     @Scheduled(fixedDelay = 60000)
     public void sendTasksToNotify() {
-        List<TaskToNotifyDTO> tasks = taskService.getTasksToNotify(new Date());
+        List<TaskToNotifyDTO> tasks = taskService.getTasksToNotify(LocalDateTime.now());
         tasks.forEach((a) -> emailService.sendMessage(a));
     }
 
