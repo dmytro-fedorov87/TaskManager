@@ -13,6 +13,7 @@ import com.example.taskmanager.repositoryJPA.ProjectRepository;
 import com.example.taskmanager.repositoryJPA.TaskRepository;
 import com.example.taskmanager.repositoryJPA.WorkerRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -123,19 +124,18 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.countByConditionAndProject_Id(taskCondition, idProject);
     }
 
-
     @Transactional(readOnly = true)
     @Override
-    public List<TaskToNotifyDTO> getTasksToNotify(Date now) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(now);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        Date from = calendar.getTime();
-        calendar.add(Calendar.MINUTE, 1);
-        Date to = calendar.getTime();
+    public List<TaskToNotifyDTO> getTasksToNotify(LocalDateTime localDateTime) {
+        LocalDateTime from = LocalDateTime.
+                of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth(),
+                        localDateTime.getHour(), localDateTime.getMinute());
+        LocalDateTime to = LocalDateTime.
+                of(localDateTime.getYear(), localDateTime.getMonth(), localDateTime.getDayOfMonth(),
+                        localDateTime.getHour(), localDateTime.getMinute() + 1);
 
-        List<TaskToNotifyDTO> taskToNotifyDTOList = taskRepository.findTaskToNotify(from, to);
+
+        List<TaskToNotifyDTO> taskToNotifyDTOList = taskRepository.findTaskToNotify(to, from);
         changeTaskConditional(taskToNotifyDTOList);
         return taskToNotifyDTOList;
     }
