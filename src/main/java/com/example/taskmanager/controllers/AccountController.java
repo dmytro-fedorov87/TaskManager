@@ -28,7 +28,9 @@ public class AccountController {
         String name = (String) ourAttributes.get("name");
         String email = (String) ourAttributes.get("email");
         String picture = (String) ourAttributes.get("picture");
-        return AccountDTO.of(name, email, picture);
+        AccountDTO accountDTO = AccountDTO.of(name, email, picture);
+        accountService.addAccount(accountDTO);
+        return accountDTO;
     }
 
 }

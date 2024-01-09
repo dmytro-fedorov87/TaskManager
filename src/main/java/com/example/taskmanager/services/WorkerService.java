@@ -21,7 +21,6 @@ import java.util.List;
 public class WorkerService implements WorkerServiceInterface {
     private final WorkerRepository workerRepository;
     private final AccountRepository accountRepository;
-
     private final TaskRepository taskRepository;
 
     public WorkerService(WorkerRepository workerRepository, AccountRepository accountRepository, TaskRepository taskRepository) {
